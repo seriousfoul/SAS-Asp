@@ -100,14 +100,15 @@ namespace Steam_Analyze_Statistics_ASP.Models
             if (tableName == "Top5SellGame")
                 sql = $"SELECT g.*, s.image, s.link FROM {tableName} as g LEFT JOIN(select name, min(image) as image, link from topsellers GROUP BY name,link) as s on g.name = s.name  where month = \"{date.Year}-{date.Month}-01\" and link like \"%global%\"";
             else
-                sql = $"SELECT g.*, s.image, s.link FROM {tableName} as g LEFT JOIN(select name, min(image) as image, link from mostplayed GROUP BY name,link) as s on g.name = s.name  where month = \"{date.Year}-{date.Month}-01\" ";
+                sql = $"SELECT g.*, s.image, s.link FROM {tableName} as g LEFT JOIN(select name, min(image) as image, link from mostplayed GROUP BY name,link) as s on g.name = s.name  where month = \"{date.Year}-{date.Month}-01\" and link like \"%/?snr%\"";
             MySqlConnection mydb = new MySqlConnection(connStr);
             MySqlCommand sqlCommand = new MySqlCommand(sql);
             sqlCommand.Connection = mydb;
             mydb.Open();
 
             MySqlDataReader reader = sqlCommand.ExecuteReader();
-            
+
+
             if (reader.HasRows)
             {
                 while (reader.Read())
