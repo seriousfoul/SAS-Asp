@@ -216,7 +216,14 @@ namespace Steam_Analyze_Statistics_ASP.Models
         public int subTotal { set; get; }
         public int userId {  set; get; }
     }
+    public class SelfOrderInfo
+    {
+        public string productName { get; set; }
+        public int price { get; set; }
+        public int amount { get; set; }
+        public int subTotal { get; set; }
+        public string orderDate { get; set; }        
+    }
 
-    
 
 }

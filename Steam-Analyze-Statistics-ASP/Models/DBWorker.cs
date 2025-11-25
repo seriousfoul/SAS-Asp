@@ -25,11 +25,11 @@ namespace Steam_Analyze_Statistics_ASP.Models
             string sql = $"select * from {tableName} where month >= \"{date.Year}-{date.Month}-01\"";
 
             MySqlConnection mydb = new MySqlConnection(connStr);
-            MySqlCommand mySqlCommand = new MySqlCommand(sql);
-            mySqlCommand.Connection = mydb;
+            MySqlCommand sqlCommand = new MySqlCommand(sql);
+            sqlCommand.Connection = mydb;
             mydb.Open();
 
-            MySqlDataReader reader = mySqlCommand.ExecuteReader();
+            MySqlDataReader reader = sqlCommand.ExecuteReader();
             if (reader.HasRows)
             {
                 while (reader.Read())
@@ -401,12 +401,12 @@ namespace Steam_Analyze_Statistics_ASP.Models
                 string sql = "select admin from user where account = @account";
 
                 MySqlConnection mydb = new MySqlConnection(connStr);
-                MySqlCommand MySqlCommand = new MySqlCommand(sql);
-                MySqlCommand.Parameters.AddWithValue("@account", account);
-                MySqlCommand.Connection = mydb;
+                MySqlCommand sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Parameters.AddWithValue("@account", account);
+                sqlCommand.Connection = mydb;
                 mydb.Open();
 
-                MySqlDataReader reader = MySqlCommand.ExecuteReader();
+                MySqlDataReader reader = sqlCommand.ExecuteReader();
                 reader.Read();
                 bool admin = reader.GetBoolean(0);
                 mydb.Close();                
@@ -507,14 +507,14 @@ namespace Steam_Analyze_Statistics_ASP.Models
             string sql = "select t.title, u.account, t.date, t.content from `Topic` t inner join `user` u on t.userId = u.id  where t.topicId = @id";
 
             MySqlConnection mydb = new MySqlConnection(connStr);
-            MySqlCommand MySqlCommand = new MySqlCommand(sql);
-            MySqlCommand.Connection = mydb;
+            MySqlCommand sqlCommand = new MySqlCommand(sql);
+            sqlCommand.Connection = mydb;
 
-            MySqlCommand.Parameters.AddWithValue("@id", id);
+            sqlCommand.Parameters.AddWithValue("@id", id);
 
             mydb.Open();
 
-            MySqlDataReader record = MySqlCommand.ExecuteReader();
+            MySqlDataReader record = sqlCommand.ExecuteReader();
 
             TopicInfo data = new TopicInfo();
 
@@ -546,14 +546,14 @@ namespace Steam_Analyze_Statistics_ASP.Models
             string sql = "select u.account, s.lastUpdate, s.content, r.Rank from topicRank r inner join topicReply s on r.TopicReplyId = s.topicReplyId inner join `user` u on s.userId = u.id  where r.TopicId = @id order by r.Rank";
 
             MySqlConnection mydb = new MySqlConnection(connStr);
-            MySqlCommand MySqlCommand = new MySqlCommand(sql);
-            MySqlCommand.Connection = mydb;
+            MySqlCommand sqlCommand = new MySqlCommand(sql);
+            sqlCommand.Connection = mydb;
 
-            MySqlCommand.Parameters.AddWithValue("@id", id);
+            sqlCommand.Parameters.AddWithValue("@id", id);
 
             mydb.Open();
 
-            MySqlDataReader data = MySqlCommand.ExecuteReader();
+            MySqlDataReader data = sqlCommand.ExecuteReader();
 
             List<TopicReplyInfo> tempList = new List<TopicReplyInfo>();
 
@@ -583,11 +583,11 @@ namespace Steam_Analyze_Statistics_ASP.Models
 
                 string sql = $"select id from user where account = '{account}'";
                 MySqlConnection mydb = new MySqlConnection(connStr);
-                MySqlCommand MySqlCommand = new MySqlCommand(sql);
-                MySqlCommand.Connection = mydb;
+                MySqlCommand sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Connection = mydb;
 
                 mydb.Open();
-                MySqlDataReader reader = MySqlCommand.ExecuteReader();
+                MySqlDataReader reader = sqlCommand.ExecuteReader();
 
 
                 reader.Read();
@@ -597,36 +597,36 @@ namespace Steam_Analyze_Statistics_ASP.Models
                 sql = "insert into Topic (userId, title, content, date, lastUpdate) values (@userId, @title, @content, @date, @lastUpdate)";
 
                 mydb = new MySqlConnection(connStr);
-                MySqlCommand = new MySqlCommand(sql);
-                MySqlCommand.Parameters.AddWithValue("@userId", id);
-                MySqlCommand.Parameters.AddWithValue("@title", data.title);
-                MySqlCommand.Parameters.AddWithValue("@content", data.content);
-                MySqlCommand.Parameters.AddWithValue("@date", time);
-                MySqlCommand.Parameters.AddWithValue("@lastUpdate", time);
-                MySqlCommand.Connection = mydb;
+                sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Parameters.AddWithValue("@userId", id);
+                sqlCommand.Parameters.AddWithValue("@title", data.title);
+                sqlCommand.Parameters.AddWithValue("@content", data.content);
+                sqlCommand.Parameters.AddWithValue("@date", time);
+                sqlCommand.Parameters.AddWithValue("@lastUpdate", time);
+                sqlCommand.Connection = mydb;
 
                 mydb.Open();
-                MySqlCommand.ExecuteNonQuery();
+                sqlCommand.ExecuteNonQuery();
                 mydb.Close();
 
                 sql = $"insert into TopicRank (TopicId, lastUpdate) values ( (select id from Topic where userId = {id} and date = '{time}'),'{time}')";
 
                 mydb = new MySqlConnection(connStr);
-                MySqlCommand = new MySqlCommand(sql);
-                MySqlCommand.Connection = mydb;
+                sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Connection = mydb;
 
                 mydb.Open();
-                MySqlCommand.ExecuteNonQuery();
+                sqlCommand.ExecuteNonQuery();
                 mydb.Close();
 
 
                 sql = $"select count(*) from Topic where userId = {id} and date = '{time}'";
 
                 mydb = new MySqlConnection(connStr);
-                MySqlCommand = new MySqlCommand(sql);
-                MySqlCommand.Connection = mydb;
+                sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Connection = mydb;
                 mydb.Open();
-                reader = MySqlCommand.ExecuteReader();
+                reader = sqlCommand.ExecuteReader();
 
                 reader.Read();
                 int count = reader.GetInt32(0);
@@ -648,11 +648,11 @@ namespace Steam_Analyze_Statistics_ASP.Models
 
                 string sql = $"select id from user where account = '{account}'";
                 MySqlConnection mydb = new MySqlConnection(connStr);
-                MySqlCommand MySqlCommand = new MySqlCommand(sql);
-                MySqlCommand.Connection = mydb;
+                MySqlCommand sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Connection = mydb;
 
                 mydb.Open();
-                MySqlDataReader reader = MySqlCommand.ExecuteReader();
+                MySqlDataReader reader = sqlCommand.ExecuteReader();
 
 
                 reader.Read();
@@ -662,24 +662,24 @@ namespace Steam_Analyze_Statistics_ASP.Models
                 sql = "insert into TopicReply (userId, content, lastUpdate, topicId) values (@userId, @content, @lastUpdate, @topicId)";
 
                 MySqlConnection mydb2 = new MySqlConnection(connStr);
-                MySqlCommand = new MySqlCommand(sql);
-                MySqlCommand.Parameters.AddWithValue("@userId", userId);
-                MySqlCommand.Parameters.AddWithValue("@content", data.replyContent);
-                MySqlCommand.Parameters.AddWithValue("@lastUpdate", time);
-                MySqlCommand.Parameters.AddWithValue("@topicId", data.topicId);
-                MySqlCommand.Connection = mydb2;
+                sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Parameters.AddWithValue("@userId", userId);
+                sqlCommand.Parameters.AddWithValue("@content", data.replyContent);
+                sqlCommand.Parameters.AddWithValue("@lastUpdate", time);
+                sqlCommand.Parameters.AddWithValue("@topicId", data.topicId);
+                sqlCommand.Connection = mydb2;
 
                 mydb2.Open();
-                MySqlCommand.ExecuteNonQuery();
+                sqlCommand.ExecuteNonQuery();
                 mydb2.Close();
 
                 sql = $"select id from TopicReply where userId = {userId} and topicId = {data.topicId} and lastUpdate = '{time}' ";
                 MySqlConnection mydb3 = new MySqlConnection(connStr);
-                MySqlCommand = new MySqlCommand(sql);
-                MySqlCommand.Connection = mydb3;
+                sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Connection = mydb3;
 
                 mydb3.Open();
-                reader = MySqlCommand.ExecuteReader();
+                reader = sqlCommand.ExecuteReader();
                 reader.Read();
                 int topicReplyId = reader.GetInt32(0);
                 mydb3.Close();
@@ -690,14 +690,14 @@ namespace Steam_Analyze_Statistics_ASP.Models
                 sql = $"insert into TopicRank (topicId, topicReplyId, rank, lastUpdate) values (@topicId, @topicReplyId, (select max(`rank`)+1 from TopicRank where topicId = @topicId), @lastUpdate)";
 
                 MySqlConnection mydb4 = new MySqlConnection(connStr);
-                MySqlCommand = new MySqlCommand(sql);
-                MySqlCommand.Parameters.AddWithValue("@topicId", data.topicId);
-                MySqlCommand.Parameters.AddWithValue("@topicReplyId", topicReplyId);
-                MySqlCommand.Parameters.AddWithValue("@lastUpdate", time);
-                MySqlCommand.Connection = mydb4;
+                sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Parameters.AddWithValue("@topicId", data.topicId);
+                sqlCommand.Parameters.AddWithValue("@topicReplyId", topicReplyId);
+                sqlCommand.Parameters.AddWithValue("@lastUpdate", time);
+                sqlCommand.Connection = mydb4;
 
                 mydb4.Open();
-                MySqlCommand.ExecuteNonQuery();
+                sqlCommand.ExecuteNonQuery();
                 mydb4.Close();
 
                 return true;
@@ -730,12 +730,12 @@ namespace Steam_Analyze_Statistics_ASP.Models
             string sql = "select name,email,phone,birthday,address,account from user where account = @account";
 
             MySqlConnection mydb = new MySqlConnection(connStr);
-            MySqlCommand MySqlCommand = new MySqlCommand(sql);
-            MySqlCommand.Parameters.AddWithValue("@account", account);
-            MySqlCommand.Connection = mydb;
+            MySqlCommand sqlCommand = new MySqlCommand(sql);
+            sqlCommand.Parameters.AddWithValue("@account", account);
+            sqlCommand.Connection = mydb;
 
             mydb.Open();
-            MySqlDataReader record = MySqlCommand.ExecuteReader();
+            MySqlDataReader record = sqlCommand.ExecuteReader();
             record.Read();
 
             string temp = record.IsDBNull(3) ? "1950-01-01" : record.GetString(3);
@@ -798,18 +798,18 @@ namespace Steam_Analyze_Statistics_ASP.Models
                 string sql = "update user set name = @name, email = @email, phone = @phone, sex = @sex, birthday = @birthday, address = @address where account = @account";
 
                 MySqlConnection mydb = new MySqlConnection(connStr);
-                MySqlCommand MySqlCommand = new MySqlCommand(sql);
-                MySqlCommand.Parameters.AddWithValue("@name", data.name);
-                MySqlCommand.Parameters.AddWithValue("@email", data.email);
-                MySqlCommand.Parameters.AddWithValue("@phone", data.phone);
-                MySqlCommand.Parameters.AddWithValue("@sex", data.sex);
-                MySqlCommand.Parameters.AddWithValue("@birthday", $"{data.year}-{data.month}-{data.day}");
-                MySqlCommand.Parameters.AddWithValue("@address", data.address);
-                MySqlCommand.Parameters.AddWithValue("@account", account);
-                MySqlCommand.Connection = mydb;
+                MySqlCommand sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Parameters.AddWithValue("@name", data.name);
+                sqlCommand.Parameters.AddWithValue("@email", data.email);
+                sqlCommand.Parameters.AddWithValue("@phone", data.phone);
+                sqlCommand.Parameters.AddWithValue("@sex", data.sex);
+                sqlCommand.Parameters.AddWithValue("@birthday", $"{data.year}-{data.month}-{data.day}");
+                sqlCommand.Parameters.AddWithValue("@address", data.address);
+                sqlCommand.Parameters.AddWithValue("@account", account);
+                sqlCommand.Connection = mydb;
 
                 mydb.Open();
-                int result = MySqlCommand.ExecuteNonQuery();
+                int result = sqlCommand.ExecuteNonQuery();
                 mydb.Close();
                 return result > 0;
             }
@@ -827,13 +827,13 @@ namespace Steam_Analyze_Statistics_ASP.Models
                 string sql = "update user set password = @password where account = @account";
 
                 MySqlConnection mydb = new MySqlConnection(connStr);
-                MySqlCommand MySqlCommand = new MySqlCommand(sql);
-                MySqlCommand.Parameters.AddWithValue("@password", password);
-                MySqlCommand.Parameters.AddWithValue("@account", account);
-                MySqlCommand.Connection = mydb;
+                MySqlCommand sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Parameters.AddWithValue("@password", password);
+                sqlCommand.Parameters.AddWithValue("@account", account);
+                sqlCommand.Connection = mydb;
 
                 mydb.Open();
-                int result = MySqlCommand.ExecuteNonQuery();
+                int result = sqlCommand.ExecuteNonQuery();
                 mydb.Close();
                 return result > 0;
             }
@@ -855,13 +855,13 @@ namespace Steam_Analyze_Statistics_ASP.Models
                     sql = "select * from TopicReply left join Topic on Topic.topicId = TopicReply.topicId left join user on Topic.userid = user.id order by lastUpdate desc;";
 
                 MySqlConnection mydb = new MySqlConnection(connStr);
-                MySqlCommand MySqlCommand = new MySqlCommand(sql);
-                MySqlCommand.Parameters.AddWithValue("@account", account);
-                MySqlCommand.Connection = mydb;
+                MySqlCommand sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Parameters.AddWithValue("@account", account);
+                sqlCommand.Connection = mydb;
                 mydb.Open();
 
                 List<SelfTopicInfo> list = new List<SelfTopicInfo>();
-                MySqlDataReader reader = MySqlCommand.ExecuteReader();
+                MySqlDataReader reader = sqlCommand.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
@@ -917,13 +917,13 @@ namespace Steam_Analyze_Statistics_ASP.Models
                 
 
                 mydb = new MySqlConnection(connStr);
-                MySqlCommand MySqlCommand = new MySqlCommand(sql);
-                MySqlCommand.Connection = mydb;
+                MySqlCommand sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Connection = mydb;
                 if (id != 0)
-                    MySqlCommand.Parameters.AddWithValue("@id", id);
+                    sqlCommand.Parameters.AddWithValue("@id", id);
                 mydb.Open();
 
-                MySqlDataReader record = MySqlCommand.ExecuteReader();
+                MySqlDataReader record = sqlCommand.ExecuteReader();
                 List<ProductInfo> list = new List<ProductInfo>();
 
                 if (record.HasRows)
@@ -966,12 +966,12 @@ namespace Steam_Analyze_Statistics_ASP.Models
                 string sql = "select id from user where account = @account";
 
                 mydb = new MySqlConnection(connStr);
-                MySqlCommand MySqlCommand = new MySqlCommand(sql);
-                MySqlCommand.Connection = mydb;
-                MySqlCommand.Parameters.AddWithValue("@account", account);
+                MySqlCommand sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Connection = mydb;
+                sqlCommand.Parameters.AddWithValue("@account", account);
                 mydb.Open();
 
-                MySqlDataReader record = MySqlCommand.ExecuteReader();
+                MySqlDataReader record = sqlCommand.ExecuteReader();
 
                 record.Read();
                 int userId = record.GetInt32(0);
@@ -980,13 +980,13 @@ namespace Steam_Analyze_Statistics_ASP.Models
                 sql = "select count(*) from cart where productId = @productId and userId = @userId";
 
                 mydb = new MySqlConnection(connStr);
-                MySqlCommand = new MySqlCommand(sql);
-                MySqlCommand.Connection = mydb;
-                MySqlCommand.Parameters.AddWithValue("@productId", data.productId);
-                MySqlCommand.Parameters.AddWithValue("@userId", userId);
+                sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Connection = mydb;
+                sqlCommand.Parameters.AddWithValue("@productId", data.productId);
+                sqlCommand.Parameters.AddWithValue("@userId", userId);
                 mydb.Open();
 
-                record = MySqlCommand.ExecuteReader();
+                record = sqlCommand.ExecuteReader();
 
                 record.Read();
                 int count = record.GetInt32(0);
@@ -996,15 +996,15 @@ namespace Steam_Analyze_Statistics_ASP.Models
                 {
                     sql = "insert into cart (userId, productId, amount, subTotal) values (@userId, @productId, @amount, @subTotal)";
                     mydb = new MySqlConnection(connStr);
-                    MySqlCommand = new MySqlCommand(sql);
-                    MySqlCommand.Connection = mydb;
-                    MySqlCommand.Parameters.AddWithValue("@userId", userId);
-                    MySqlCommand.Parameters.AddWithValue("@productId", data.productId);
-                    MySqlCommand.Parameters.AddWithValue("@amount", data.amount);
-                    MySqlCommand.Parameters.AddWithValue("@subTotal", data.subTotal);
+                    sqlCommand = new MySqlCommand(sql);
+                    sqlCommand.Connection = mydb;
+                    sqlCommand.Parameters.AddWithValue("@userId", userId);
+                    sqlCommand.Parameters.AddWithValue("@productId", data.productId);
+                    sqlCommand.Parameters.AddWithValue("@amount", data.amount);
+                    sqlCommand.Parameters.AddWithValue("@subTotal", data.subTotal);
 
                     mydb.Open();
-                    MySqlCommand.ExecuteNonQuery();
+                    sqlCommand.ExecuteNonQuery();
 
                 }
                 else
@@ -1021,15 +1021,15 @@ namespace Steam_Analyze_Statistics_ASP.Models
                             where userId = @userId and productId = @productId";
 
                     mydb = new MySqlConnection(connStr);
-                    MySqlCommand = new MySqlCommand(sql);
-                    MySqlCommand.Connection = mydb;
-                    MySqlCommand.Parameters.AddWithValue("@userId", userId);
-                    MySqlCommand.Parameters.AddWithValue("@productId", data.productId);
-                    MySqlCommand.Parameters.AddWithValue("@amount", data.amount);
-                    MySqlCommand.Parameters.AddWithValue("@subTotal", data.subTotal);
+                    sqlCommand = new MySqlCommand(sql);
+                    sqlCommand.Connection = mydb;
+                    sqlCommand.Parameters.AddWithValue("@userId", userId);
+                    sqlCommand.Parameters.AddWithValue("@productId", data.productId);
+                    sqlCommand.Parameters.AddWithValue("@amount", data.amount);
+                    sqlCommand.Parameters.AddWithValue("@subTotal", data.subTotal);
 
                     mydb.Open();
-                    MySqlCommand.ExecuteNonQuery();
+                    sqlCommand.ExecuteNonQuery();
                 }
             }
             catch
@@ -1052,12 +1052,12 @@ namespace Steam_Analyze_Statistics_ASP.Models
                 string sql = "select p.productId, p.name, p.price, p.amount as remain, c.cartId, c.amount, c.subTotal from cart c inner join products p on c.productId = p.productId where userid = (select id from user where account = @account)";
 
                 mydb = new MySqlConnection(connStr);
-                MySqlCommand MySqlCommand = new MySqlCommand(sql);
-                MySqlCommand.Connection = mydb;
-                MySqlCommand.Parameters.AddWithValue("@account", account);
+                MySqlCommand sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Connection = mydb;
+                sqlCommand.Parameters.AddWithValue("@account", account);
                 mydb.Open();
 
-                MySqlDataReader record = MySqlCommand.ExecuteReader();
+                MySqlDataReader record = sqlCommand.ExecuteReader();
                 List<ProductInfo> list = new List<ProductInfo>();
 
                 
@@ -1109,12 +1109,12 @@ namespace Steam_Analyze_Statistics_ASP.Models
                 string sql = "select count(*) from cart where userid = (select id from user where account = @account)";
 
                 mydb = new MySqlConnection(connStr);
-                MySqlCommand MySqlCommand = new MySqlCommand(sql);
-                MySqlCommand.Connection = mydb;
-                MySqlCommand.Parameters.AddWithValue("@account", account);
+                MySqlCommand sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Connection = mydb;
+                sqlCommand.Parameters.AddWithValue("@account", account);
                 mydb.Open();
 
-                MySqlDataReader record = MySqlCommand.ExecuteReader();
+                MySqlDataReader record = sqlCommand.ExecuteReader();
                 List<ProductInfo> list = new List<ProductInfo>();
 
                 record.Read();
@@ -1141,11 +1141,11 @@ namespace Steam_Analyze_Statistics_ASP.Models
                 string sql = "delete from cart where cartId = @id";
 
                 mydb = new MySqlConnection(connStr);
-                MySqlCommand MySqlCommand = new MySqlCommand(sql);
-                MySqlCommand.Connection = mydb;
-                MySqlCommand.Parameters.AddWithValue("@id", id);
+                MySqlCommand sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Connection = mydb;
+                sqlCommand.Parameters.AddWithValue("@id", id);
                 mydb.Open();
-                int result = MySqlCommand.ExecuteNonQuery();                
+                int result = sqlCommand.ExecuteNonQuery();                
 
                 return result > 0;
             }
@@ -1282,6 +1282,51 @@ namespace Steam_Analyze_Statistics_ASP.Models
                 mydb?.Close();
                 mydb?.Dispose();
             }
+        }
+
+        public List<SelfOrderInfo> GetSelfOrderInfo(string account)
+        {
+            MySqlConnection mydb = null;
+            try
+            {
+                string sql;                
+                sql = $"select p.name,p.price,od.amount,od.subTotal,o.`date` from orderDetail od inner join products p on od.productId = p.productId inner join `order` o on od.orderId = o.orderId where od.userId = (select id from user where account = @account) order by o.`date` desc;";
+
+                mydb = new MySqlConnection(connStr);
+                MySqlCommand sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Connection = mydb;
+                sqlCommand.Parameters.AddWithValue("@account", account);
+                mydb.Open();
+
+                MySqlDataReader record = sqlCommand.ExecuteReader();
+                List<SelfOrderInfo> list = new List<SelfOrderInfo>();
+
+                if (record.HasRows)
+                {
+                    while (record.Read())
+                    {
+                        list.Add(new SelfOrderInfo()
+                        {
+                            productName = record.GetString(0),
+                            price = record.GetInt32(1),
+                            amount = record.GetInt32(2),
+                            subTotal = record.GetInt32(3),
+                            orderDate = record.GetString(4)
+                        });                        
+                    }
+                }
+
+                return list;
+            }
+            catch
+            {
+                return new List<SelfOrderInfo>();
+            }
+            finally
+            {
+                mydb?.Close();
+            }
+
         }
     }
 }

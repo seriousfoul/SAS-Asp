@@ -126,15 +126,13 @@ namespace Steam_Analyze_Statistics_ASP.Controllers
             else
                 return RedirectToAction("Login", "LoginAndRigister");
         }
-        public IActionResult SelfOrder(string type = "topic", int page = 1)
+        public IActionResult SelfOrder(int page = 1)
         {
             int dataTotal = 10;
             if (isLogin())
             {
-                var data = new DBWorker().SelfTopicInfo(type, HttpContext.Session.GetString("user"));
-
+                var data = new DBWorker().GetSelfOrderInfo(HttpContext.Session.GetString("user"));
                 var result = data.ToPagedList(page, dataTotal);
-                ViewData["type"] = type;
                 return View(model: result);
             }
             else
@@ -176,6 +174,8 @@ namespace Steam_Analyze_Statistics_ASP.Controllers
 
                         if (HttpContext.Session.GetInt32("CartAmount") != null)
                             ViewData["CartAmount"] = HttpContext.Session.GetInt32("CartAmount").ToString();
+
+                        ViewData["level"] = HttpContext.Session.GetString("level");
 
                         return true;
                     }

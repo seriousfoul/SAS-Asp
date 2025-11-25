@@ -113,10 +113,21 @@
                 </a>
             </div>
             <div class="memberMenu">
-                <a asp-controller="Member" asp-action="SelfTopic">
+                <a asp-controller="Member" asp-action="SelfOrder">
                     <span>購物紀錄</span>
                 </a>
             </div>
+            @if (ViewData["level"].ToString() == "admin")
+            {       
+                <hr />
+                <h2>管理者</h2>
+                <div class="memberMenu">
+                    <a asp-controller="Member" asp-action="SelfOrder">
+                        <span>商品上下架</span>
+                    </a>
+                </div>
+            }
+            
         </div>
 
         <div class="memberRight">

@@ -1,5 +1,6 @@
 ﻿using Azure;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Steam_Analyze_Statistics_ASP.Models;
 

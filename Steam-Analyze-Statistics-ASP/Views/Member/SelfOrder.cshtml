@@ -1,5 +1,41 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@model IPagedList<SelfOrderInfo>;
+
 @{
+    Layout = "_Member";
+}
+
+<div>
+    <div class="seftTopicHead">
+        <div class="seftTopicTitle" style="width:20%"><span>產品名稱</span></div>
+        <div class="seftTopicTitle" style="width:20%"><span>產品價格</span></div>
+        <div class="seftTopicTitle" style="width:20%"><span>購買數量</span></div>
+        <div class="seftTopicTitle" style="width:20%"><span>費用小計</span></div>
+        <div class="seftTopicTitle" style="width:20%"><span>訂單時間</span></div>
+        <div style="clear:both"></div>
+    </div>
+
+    @foreach (var row in Model)
+    {        
+        <div class="seftTopicContent">
+            <div style="margin-bottom:1vh">
+                <div class="seftTopicTitle" style="width:20%"><span>@row.productName</span></div>
+                <div class="seftTopicTitle" style="width:20%"><span> @row.price </span></div>
+                <div class="seftTopicTitle" style="width:20%"><span> @row.amount </span></div>
+                <div class="seftTopicTitle" style="width:20%"><span> @row.subTotal </span></div>
+                <div class="seftTopicTitle" style="width:20%"><span> @row.orderDate </span></div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+
+    }
+    
+</div>
+
+@if (Model.Count > 0)
+{
+    <div class="pageNumber">
+        @Html.PagedListPager(Model, page => Url.Action("SelfOrder", new { page }))
+    </div>
 }
