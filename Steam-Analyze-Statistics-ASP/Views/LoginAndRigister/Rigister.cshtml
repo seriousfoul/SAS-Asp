@@ -1,0 +1,55 @@
+﻿@model Steam_Analyze_Statistics_ASP.Models.User_Account
+
+@{
+
+    Layout = "_LoginAndRigister";
+    ViewData["Title"] = "遊戲統計與圖表 - 註冊帳號";
+}
+
+@if (TempData["Message"] != null)
+{
+    <script>
+        alert(@Html.Raw(Json.Serialize(@TempData["Message"])));
+    </script>
+}
+    
+<div class="loginForm">
+    <div id="Formdiv">
+        <H2>會員註冊</H2>
+        <form asp-action="Rigister" id="registerForm" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="account" class="control-label">用戶名稱</label>
+                <input asp-for="account" class="form-control" type="text" id="regUsername" placeholder="請輸入用戶名" maxlength="20" required />
+                <span asp-validation-for="account" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="email" class="control-label">電子郵件</label>
+                <input asp-for="email" class="form-control" type="email" id="regEmail" placeholder="請輸入電子郵件" maxlength="50" required />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="password" class="control-label">密碼</label>
+                <input asp-for="password" class="form-control" type="password" id="regPassword" placeholder="請輸入密碼" maxlength="50" required />
+                <span asp-validation-for="password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="confirmPassword" class="control-label">確認密碼</label>
+                <input asp-for="confirmPassword" class="form-control" type="password" id="regTwoPassword" placeholder="請輸入密碼" maxlength="50" required />
+                <span asp-validation-for="confirmPassword" class="text-danger"></span>
+            </div>
+            <div class="from-group" style="text-align: right; ">
+                <br />
+                <button type="submit" id="stn" name="stn" class="btn btn-primary">進行註冊</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<!-- Asp.net 驗證功能 -->
+@section Scripts {
+   
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+
+}

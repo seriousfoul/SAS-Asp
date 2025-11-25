@@ -1,0 +1,261 @@
+﻿@model DbData;
+@{
+    ViewData["Title"] = "Steam 遊戲統計與圖表視覺化";
+    List<DbData.Top5SellGame> top5SellGame = ViewBag.Top5SellGame;
+    List<DbData.Top5PeopleGame> top5PeopleGame = ViewBag.Top5PeopleGame;
+    List<DbData.Top10SellGameType> top10SellGameType = ViewBag.Top10SellGameType;
+    List<DbData.Top10PeopleGameType> top10PeopleGameType = ViewBag.Top10PeopleGameType;
+    List<DbData.TopSellPricePie> topSellPricePie = ViewBag.TopSellPricePie;
+    List<DbData.MostPlayPricePie> mostPlayPricePie = ViewBag.MostPlayPricePie;
+    string str = "";
+    Console.WriteLine(top5SellGame.Count.ToString());
+}
+
+
+<!-- 顯示左半邊 -->
+<div class="viewSide">
+
+    <!-- 顯示 本月前5名 暢銷遊戲 -->
+    <div class="viewData">
+        <p>本月前5名 暢銷遊戲</p>
+        @if (top5SellGame.Count > 0){
+            <div class="rowData">
+                <div class="rowPic">
+                    <a href="@top5SellGame[0].link">
+                        <picture>
+                            <source srcset="@top5SellGame[0].image" />
+                            <img src="@top5SellGame[0].image" srcset="/img/store_home_share.jpg" />
+                        </picture>
+                    </a>
+                </div>
+
+                <div class="rowText">
+                    <span >本月排名</span>
+                    <span style="width: 65%">遊戲名稱</span>
+                    
+                    @foreach (var row in top5SellGame)
+                    {
+                        <a href="@row.link">
+                            <span>@row.rank</span>
+                            <span style="width: 65%">@row.name</span>
+                        </a>
+                        
+                    }
+                </div>
+
+            </div>
+        }else{
+            <div class="rowText">
+                <span>本月排名暫無資料</span>
+            </div>
+            <br />
+            <div class="rowPic">
+                <img src="/img/waiting.png" style=" width: 40%" />
+            </div>
+        }
+    </div>
+
+    <!-- 顯示 本月前10名 暢銷遊戲 類型-->
+    <div class="viewData">
+
+        <p>本月前10名 暢銷遊戲 - 類型</p>
+        @if (top10SellGameType.Count > 0)
+        {
+            <div class="rowData">
+
+                <div class="rowText">
+                    <span style="width: 33%">本月排名</span>
+                    <span style="width: 33%">出現次數</span>
+                    <span style="width: 34%">遊戲名稱</span>
+
+                    @foreach(var row in top10SellGameType)
+                    {
+                        <span style="width: 33%">@row.rank</span>
+                        <span style="width: 33%">@row.count</span>
+                        <span style="width: 34%">@row.type</span>
+                    }                       
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="rowText">
+                <span>本月排名暫無資料</span>
+            </div>
+            <br />
+            <div class="rowPic">
+                <img src="/img/waiting.png" style="width:40%"  />
+            </div>
+        }
+    </div>
+
+    <!-- 顯示 本月 暢銷遊戲 價格類型比例-->
+    <div class="viewData">
+        <p>本月 暢銷遊戲 價格類型比例</p>
+        @if (topSellPricePie.Count > 0)
+        {
+            <div class="rowData">
+
+                <div class="rowText">
+                    <span style="width: 50%; padding-left: 15%">價格類型</span>
+                    <span style="width: 50%; padding-right: 15%">比例</span>
+
+                    @foreach (var row in topSellPricePie)
+                    {                            
+                        @if(row.type == "free")
+                        {
+                            str = "免費";
+                                                                    
+                        }                                
+                        else if (row.type == "sale")
+                        {
+                            str = "特價";
+                        }
+                        else
+                        {
+                            str = "原價";
+                        }
+                        <span style="width: 50%; padding-left: 15%">@str</span>
+                        <span style="width: 50%; padding-right: 15%">@row.percent</span>
+                    } 
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="rowText">
+                <span>本月排名暫無資料</span>
+            </div>
+            <br />
+            <div class="rowPic">
+                <img src="/img/waiting.png" style="width: 40%"  />
+            </div>
+        }
+    </div>
+
+</div>
+
+<!-- 顯示右半邊 -->
+<div class="viewSide">
+
+    <!-- 顯示 本月前5名 最多人遊玩 -->
+    <div class="viewData">
+
+        <p>本月前5名 最多人遊玩</p>
+        @if (top5PeopleGame.Count > 0)
+        {
+            <div class="rowData">
+
+                <div class="rowPic">
+                    <a href="@top5PeopleGame[0].link}}">
+                        <picture>
+                            <source srcset="@top5PeopleGame[0].image" />
+                            <img src="@top5PeopleGame[0].image" srcset="/img/store_home_share.jpg" />
+                        </picture>
+                    </a>
+                </div>
+
+                <div class="rowText">
+                    <span >本月排名</span>
+                    <span style="width: 65%">遊戲名稱</span>
+
+                    @foreach(var row in top5PeopleGame)
+                    {
+                        <a href="@row.link">
+                            <span>@row.rank</span>
+                            <span style="width: 65%">@row.name</span>
+                        </a>
+                    }
+                </div>
+
+            </div>
+        }
+        else
+        {
+            <div class="rowText">
+                <span>本月排名暫無資料</span>
+            </div>
+            <br />
+            <div class="rowPic">
+                <img src="/img/waiting.png" style="width: 40%" />
+            </div>
+        }
+    </div>
+
+    <!-- 顯示 本月前10名 暢銷遊戲 類型-->
+    <div class="viewData">
+        <p>本月前10名 最多人遊玩 - 類型</p>
+        @if(top10PeopleGameType.Count > 0)
+        {
+            <div class="rowData">
+
+                <div class="rowText">
+                    <span style="width: 33%">本月排名</span>
+                    <span style="width: 33%">出現次數</span>
+                    <span style="width: 34%">遊戲名稱</span>
+
+                    @foreach (var row in top10PeopleGameType)
+                    {
+                        <span style="width: 33%">@row.rank</span>
+                        <span style="width: 33%">@row.count</span>
+                        <span style="width: 34%">@row.type</span>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="rowText">
+                <span>本月排名暫無資料</span>
+            </div>
+            <br />
+            <div class="rowPic">
+                <img src="/img/waiting.png" style="width: 40%" />
+            </div>
+        }
+    </div>
+
+    <!-- 顯示 本月 暢銷遊戲 價格類型比例-->
+    <div class="viewData">
+        <p>本月 暢銷遊戲 價格類型比例</p>
+        @if(top10PeopleGameType.Count > 0)
+        {
+            <div class="rowData">
+
+                <div class="rowText">
+                    <span style="width: 50%; padding-left: 15%">價格類型</span>
+                    <span style="width: 50%; padding-right: 15%">比例</span>
+
+                    @foreach(var row in topSellPricePie)
+                    {
+                            
+                        @if (row.type == "free")
+                        {
+                            str = "免費";
+                        }
+                        else if (row.type == "sale")
+                        {
+                            str = "特價";
+                        }
+                        else
+                        {
+                            str = "原價";
+                        }
+                        <span style="width: 50%; padding-left: 15%">@str</span>
+                        <span style="width: 50%; padding-right: 15%">@row.percent</span>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="rowText">
+                <span>本月排名暫無資料</span>
+            </div>
+            <br />
+            <div class="rowPic">
+                <img src="/img/waiting.png" style="width: 40%" />
+            </div>
+        }
+    </div>
+</div>

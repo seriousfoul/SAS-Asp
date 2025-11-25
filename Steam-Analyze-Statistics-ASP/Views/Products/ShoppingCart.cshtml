@@ -1,0 +1,88 @@
+﻿@model List<ProductInfo>;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@if (TempData["Message"] != null && TempData["Message"] != "")
+{
+    <script>
+        alert(@Html.Raw(Json.Serialize(@TempData["Message"])));
+    </script>
+
+    TempData["Message"] = "";
+}
+
+<h1>購物車結算</h1>
+<br />
+<hr />
+<div class="cart">
+    <div class="cartTitle">
+        <div class="cartSpanWidth">
+            <span>商品名稱</span>
+        </div>        
+
+        <div class="cartSpanWidth">
+            <span>商品價格</span>
+        </div>
+
+        <div class="cartSpanWidth">
+            <span>剩餘數量</span>
+        </div>
+
+        <div class="cartSpanWidth">
+            <span>購買數量</span>
+        </div>
+
+        <div class="cartSpanWidth">
+            <span>小計</span>
+        </div>
+    </div>
+    @foreach (var record in Model)
+    {
+        <div class="cartContent">
+            <div class="cartSpanWidth">
+                <span>@record.name</span>
+            </div>
+
+            <div class="cartSpanWidth" style="text-align:right;">
+                <span >@record.price</span>
+            </div>
+
+            <div class="cartSpanWidth" style="text-align:right;">
+                <span >@record.remain</span>
+            </div>
+
+            <div class="cartSpanWidth" style="text-align:right;">
+                <span>@record.amount</span>
+            </div>
+
+            <div class="cartSpanWidth" style="text-align:right;">
+                <span>@record.subTotal</span>
+            </div>
+            <div>
+                <button class="btn btn-primary"><a asp-controller="Products" asp-action="DeleteCart" asp-route-id="@record.cartId" style="text-decoration:none; color:#FFFFFF;"><span>刪除</span></a></button>
+            </div>
+        </div>            
+    }
+    
+</div>
+<hr />
+<div class="cartContent">
+
+    <div class="cartTotal">
+        <form asp-action="Settlement" asp-controller="Products">
+            <button type="submit" class="btn btn-primary" >確認結帳</button>
+            <input type="hidden" name="total" value="@ViewData["Total"]" />
+        </form>
+    </div>
+
+    <div class="cartTotal">
+        <span style="font-size:1.5vw;">總計：@ViewData["Total"]</span>
+    </div>
+     
+</div>
+
+    
+
+
+

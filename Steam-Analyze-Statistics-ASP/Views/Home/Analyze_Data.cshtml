@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "遊戲統計與圖表 - 統計圖表";
+
+    string month = ViewData["month"].ToString();
+    string img = "/img/";
+    string topsellers_cloud = img + "topsellers_cloud.png";
+    string mostplay_cloud = img + "mostplay_cloud.png";
+    string topsellers = img + "TOPSELLERS - line.png";
+    string mostplayed = img + "MOSTPLAYED - line.png";
+    string topsellers_t = img + "TOPSELLERS(Type) - bar.png";
+    string mostplayed_t = img + "MOSTPLAYED(Type) - bar.png";
+    string topsellers_p = img + "TOPSELLERS(Price) - pie.png";
+    string mostplayed_p = img + "MOSTPLAYED(Price) - pie.png";
+}
+
+
+<div class="cloud_space">
+    <div class="cloud">
+        <span>本月暢銷遊戲類型</span>
+        <img src="@topsellers_cloud" onerror="this.onerror=null; this.src='/img/waiting.png';" />
+    </div>
+    <div class="cloud">
+        <span>本月最多玩家遊戲類型</span>
+        <img src="@mostplay_cloud" onerror="this.onerror=null; this.src='/img/waiting.png';" />
+    </div>
+    <div class="cloud">
+        <span>本月暢銷遊戲</span><br />
+        <span>上榜次數前5名排行走勢圖</span>
+        <img src="@topsellers" onerror="this.onerror=null; this.src='/img/waiting.png';" />
+    </div>
+    <div class="cloud">
+        <span>本月最多玩家</span><br />
+        <span>上榜次數前5名排行走勢圖</span>
+        <img src="@mostplayed" onerror="this.onerror=null; this.src='/img/waiting.png';" />
+    </div>
+    <div class="cloud">
+        <span>本月暢銷遊戲</span><br />
+        <span>前10名遊戲類型</span>
+        <img src="@topsellers_t" onerror="this.onerror=null; this.src='/img/waiting.png';" />
+    </div>
+
+    <div class="cloud">
+        <span>本月最多玩家</span><br />
+        <span>前10名遊戲類型</span>
+        <img src="@mostplayed_t" onerror="this.onerror=null; this.src='/img/waiting.png';" />
+    </div>
+    <div class="cloud">
+        <span>本月暢銷遊戲</span><br />
+        <span>費用類型比例</span>
+        <img src="@topsellers_p" onerror="this.onerror=null; this.src='/img/waiting.png';" />
+    </div>
+    <div class="cloud">
+        <span>本月最多玩家</span><br />
+        <span>費用類型比例</span>
+        <img src="@mostplayed_p" onerror="this.onerror=null; this.src='/img/waiting.png';" />
+    </div>
+</div>
+
+<div style="clear: both;"></div>

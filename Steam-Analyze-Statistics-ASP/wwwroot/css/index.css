@@ -1,0 +1,436 @@
+body {
+    background-color: #003D79;
+    margin: 0vh;
+    width: 80%;
+    margin-left: 10%;
+}
+
+/* 頁首 */
+#Banner {
+    font-size: 2.5vw;
+    /*    height: 6.5vh;*/
+    color: #ffffff;
+}
+
+#BannerLeft {
+    float: left;
+    width: 20%;
+}
+
+#Title {
+    float: left;
+    width: 50%;
+}
+
+
+#BannerRight {
+    float: right;
+    width: 30%;
+    text-align: right;
+}
+.BannerRight-Content {
+    float: left;
+}
+
+#Banner a {
+    text-decoration: none;
+}
+
+#Banner img {
+    width: 80%;
+}
+
+#Banner span {
+    padding-left: 2%;
+    color: #ffffff;
+}
+
+.logo {
+    width: 50%;
+}
+
+.loginText {
+    padding-top:5%;
+    width: 50%;
+    font-size: 1vw; 
+}
+
+
+
+/*選單*/
+#Menu {
+    background-color: #0b4299;
+    height: 2.4vw;
+    width:100%;
+}
+
+#Menu li {
+    float: left;
+    width: 16%;
+    list-style: none;
+    line-height: 2.4vw;
+    font-weight: bold;
+    font-size: 1vw;
+    color: #ffffff;
+    text-align: center;
+}
+
+#Menu a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+
+/* 內容 */
+#Content {
+    color: #ffffff;
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 5%;
+}
+
+
+/* 頁尾 */
+#Footer {
+    height: 6vh;
+    line-height: 6vh;
+    color: #ffffff;
+    text-align: center;
+    font-size:1vw;
+    border:hidden;
+}
+
+
+/* 表單格式 */
+#Formdiv {
+    color: #ffffff;
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 2%;
+    background-color: #114e8a;
+    padding:3%;
+    border:hidden;
+    border-radius: 5px;
+}
+
+
+/* 首頁 */
+.viewSide {
+    float: left;
+    width: 50%;
+    background-color: #18579e7c;
+}
+
+.viewData {
+    clear: both;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 5%;
+    text-align: center;
+    display: block;
+    margin-bottom : 5%;
+}
+
+.viewData p {
+    font-size: 1.5vw;
+    text-align: center;
+}
+
+.rowData span {
+    float: left;
+    font-size: 1vw;
+}
+
+.rowText::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+.rowPic {
+    clear: both;
+    display: break;
+}
+
+.rowPic img {
+    width: 100%;
+    display:block;
+    margin-bottom: 5%;
+}
+
+.rowText {
+    text-align: center;
+    padding-top: 1%;
+
+}
+
+.rowText span {
+    width: 35%;
+    color: #ffffff;
+    height: 2em;
+    font-size: 1vw;
+}
+
+
+/* 今日遊戲 */
+.gamePic {
+    float: left;
+    width: 25%;
+    height: 7vw;
+    padding-left: 3%;
+    padding-top: 1%;
+    padding-right: 3%;
+    padding-bottom: 1%;
+    background-color: #18579e7c;
+}
+
+.gamePic img{    
+    height:100%      
+}
+
+.gameTitle {
+    min-height: 7vw;
+    float: right;
+    padding-left: 3%;
+    padding-top: 1%;
+    width: 75%;
+    background-color: #18579e7c;
+    font-size: 1vw;
+}
+
+.gameTitle span{
+    text-decoration: none;
+    color: #ffffff;
+    font-style: oblique;
+    display: block;
+}
+
+.stop{ 
+    clear: both;    
+}
+
+.waiting img {
+    width: 30%;
+    padding-left: 5%;
+    padding-right: 5%
+}
+
+
+/* 統計圖表 */
+.cloud {
+    float: left;
+    width: 50%;
+    padding-left: 5%;
+    padding-right: 5%;
+    text-align: center;
+
+}
+
+.cloud img{
+    width: 100%;
+}
+
+.cloud span {        
+    font-size: 1.5vw;
+}
+
+
+/* 登入註冊 */
+.loginLeft {
+    float: left;
+    width: 50%;
+    text-align: right;
+}
+.loginLeft img{
+    width:70%;
+    
+}
+.loginRight {
+    float: right;
+    width: 50%;
+}
+
+.loginForm h2 {
+    padding-bottom: 4%;
+}
+
+/* 頁籤 */
+.pageNumber {
+    text-align: center;
+}
+
+.pageNumber ul.pagination {
+    display: inline-block;
+}
+
+/* 討論區 */
+.tableForum{
+    min-height: 40vh;
+}
+
+.topic {
+    width: 70%;
+    margin-left: 15%;
+    background-color: #18579e7c;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+    min-height:40vh;
+}
+
+.topicTitle {
+    font-size: 3vw;
+}
+
+.topicInfo{
+    font-size:0.75vw;
+    margin-bottom:3vh;
+}
+.topicInfo span {
+    padding-right: 2%;
+}
+
+.topicContent {
+    font-size: 1.75vw;
+    margin-bottom: 6%;
+}
+
+/* 會員頁面 */
+.memberLeft {
+    float: left;
+    width: 15%;
+}
+
+.memberMenu {
+    margin-bottom: 2vh;  
+}
+
+.memberMenu a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.memberMenu span {
+    font-size: 1.5vw;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.memberRight {
+    float: left;
+    width: 85%;
+}
+
+.memberRight a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.userInfoForm {
+    margin-bottom: 3vh;
+}
+
+.userInfoForm span {
+    font-size: 1.3vw;    
+    margin-right:1vw;
+}
+
+.seftTopicMenu {
+    margin-right: 2.5em;
+    float:left;
+    margin-bottom: 4vh;
+}
+
+.seftTopicMenu span {
+    font-size: 1.2vw;
+}
+
+.seftTopicHead {
+    border-bottom: 1px solid;
+    margin-bottom: 3vh;
+}
+
+
+.seftTopicHead span {
+    font-size: 1.2vw;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.seftTopicContent {
+    margin-bottom: 3vh;
+    padding-bottom: 3vh;
+    border-bottom:1px solid;
+}
+
+
+.seftTopicContent span {
+    font-size: 1vw;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.seftTopicTitle{
+    float:left;
+}
+
+/* 購物車 */
+.productItem{
+    float:left;
+    width: 15%;
+    margin-left :2.5%;
+    margin-right:2.5%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.productItem img{
+    width:100%;
+}
+.productItem a {
+    text-decoration: none;
+}
+
+.productItem span{
+    font-size: 1vw;
+    color:#FFFFFF;
+    margin-top: 1.5vh;
+    display:block;
+}
+.cart{
+    font-size: 1.2vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    width:95%;
+    margin-left:2.5%;
+    text-align:right;
+}
+
+.cartTitle {
+    margin-bottom: 2%;
+    font-size: 1.5vw;
+}
+
+.cartContent{
+    clear:both;
+}
+
+.cartContent::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.cartSpanWidth{
+    float:left;
+    width:13%;
+    margin-left:2.5%;
+    margin-right:2.5%;
+}
+.cartTotal {
+    float: right;
+    width: 12%;
+    margin-left: 2.5%;
+    text-align: right;
+}

@@ -1,0 +1,90 @@
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@model IPagedList<SelfTopicInfo>;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    string Temp = "";
+    Layout = "_Member";
+    var type = ViewData["type"].ToString();
+}
+
+<div class="seftTopicMenu">
+    <a asp-area="" asp-controller="Member" asp-action="SelfTopic" asp-route-type="topic">
+        <span>發表文章</span>
+    </a>
+</div>
+
+<div class="seftTopicMenu">    
+    <a asp-area="" asp-controller="Member" asp-action="SelfTopic" asp-route-type="topicReply">
+        <span>回覆文章</span>
+    </a>
+ </div>
+
+<div style="clear:both" ></div>
+<div>
+    @if (type == "topic")
+    {
+        <div class="seftTopicHead">
+            <div class="seftTopicTitle" style="width:10%"><span>編號</span></div>
+            <div class="seftTopicTitle" style="width:20%"><span>標題</span></div>
+            <div class="seftTopicTitle" style="width:13%"><span>瀏覽次數</span></div>
+            <div class="seftTopicTitle" style="width:25%"><span>創建時間</span></div>
+            <div class="seftTopicTitle" style="width:25%"><span>最後更新時間</span></div>
+            <div style="clear:both"></div>
+        </div>
+         
+        @foreach(var row in Model)
+        {
+            <a asp-controller="Forum" asp-action="Topic" asp-route-id="@row.topicId">
+            <div class="seftTopicContent">
+                <div style="margin-bottom:1vh">
+                    <div class="seftTopicTitle" style="width:10%"><span>@row.topicId</span></div>
+                    <div class="seftTopicTitle" style="width:20%"><span> @row.title </span></div>
+                    <div class="seftTopicTitle" style="width:13%"><span> @row.view </span></div>
+                    <div class="seftTopicTitle" style="width:25%"><span> @row.topicDate </span></div>
+                    <div class="seftTopicTitle" style="width:25%"><span> @row.topicLastUpdate </span></div>
+                    <div style="clear:both"></div>
+                </div>
+                <div>
+                    <span>內容：</span>
+                    <br />
+                    <span style="padding-left:2vw">@row.topicContent</span>
+                </div>
+            </div>
+            </a>
+        }
+    }
+    else if (type == "topicReply")
+    {
+        <div class="seftTopicHead">
+            <div class="seftTopicTitle" style="width:25%"><span>標題</span></div>
+            <div class="seftTopicTitle" style="width:10%"><span>作者</span></div>
+            <div class="seftTopicTitle" style="width:25%"><span>回覆最後更新時間</span></div>
+            <div style="clear:both"></div>
+        </div>
+        @foreach (var row in Model)
+        {            
+            <div class="seftTopicContent">
+                <a asp-controller="Forum" asp-action="Topic" asp-route-id="@row.topicId">
+                    <div style="margin-bottom:1vh">
+                        <div class="seftTopicTitle" style="width:25%"><span> @row.title </span></div>
+                        <div class="seftTopicTitle" style="width:10%"><span>@row.account</span></div>
+                        <div class="seftTopicTitle" style="width:25%"><span>@row.topicReplyLastUpdate</span></div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div>
+                        <span>回覆內容：</span>
+                        <br />
+                        <span style="padding-left:2vw">@row.topicReplyContent</span>
+                    </div>
+                </a>
+            </div>            
+        }
+    }
+</div>
+
+<div class="pageNumber">
+    @Html.PagedListPager(Model, page => Url.Action("SelfTopic", new { type, page }))
+</div>

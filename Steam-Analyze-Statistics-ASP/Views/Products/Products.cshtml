@@ -1,0 +1,46 @@
+﻿@using X.PagedList.Mvc.Core
+@using X.PagedList;
+@model IPagedList<ProductInfo>;
+@{
+    int count = 1;
+}
+@if (TempData["Message"] != null && TempData["Message"] != "")
+{
+    <script>
+        alert(@Html.Raw(Json.Serialize(@TempData["Message"])));
+    </script>
+
+    TempData["Message"] = "";
+}
+
+<h1>商品頁面</h1>
+<br />
+<hr />
+@foreach (var data in Model)
+{    
+    @if (count > 5)
+    {
+        <br />
+        count = 1;
+    }
+    else
+    {
+        count += 1;
+    }
+
+    <div class="productItem">
+        <a asp-area="" asp-controller="Products" asp-action="ProductDetail" asp-route-id="@data.productId">
+            <div><img src="@data.image" /></div>
+            <div>
+                <span>商品名稱：@data.name</span>
+                <span>商品價格：@data.price</span>
+                <span>剩餘數量：@data.remain</span>
+            </div>
+        </a>
+    </div>
+}    
+<div style="clear:both"></div>
+
+<div class="pageNumber">
+    @Html.PagedListPager(Model, page => Url.Action("Products", new {page}))
+</div>

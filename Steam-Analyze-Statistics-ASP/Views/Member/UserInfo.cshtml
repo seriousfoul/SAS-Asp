@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "會員資料";
+    Layout = "~/Views/Shared/_Member.cshtml";
+
+}
+@if (TempData["Message"] != null && TempData["Message"] != "")
+{
+    <script>
+        alert(@Html.Raw(Json.Serialize(@TempData["Message"])));
+        location.reload();
+    </script>
+
+    TempData["Message"] = "";
+}
+
+
+<h1>會員資料</h1>
+<hr />
+<div class="userInfoForm">
+    <span>帳號名稱：</span><span>@ViewData["user"]</span>   
+</div>
+<div class="userInfoForm">
+    <span>姓名：</span><span>@Model.name</span>
+</div>
+<div class="userInfoForm">
+    <span>信箱：</span><span>@Model.email</span>
+</div>
+<div class="userInfoForm">
+    <span>電話：</span><span>@Model.phone</span>
+</div>
+<div class="userInfoForm">
+    <span>生日：</span><span>@Model.year 年 @Model.month 月 @Model.day 日</span>
+</div>
+<div class="userInfoForm">
+    <span>地址：</span><span>@Model.address</span>
+</div>
+<br />
+<a asp-controller="Member" asp-action="EditUser">
+    <div class="form-group">
+        <intput type="button" class="btn btn-primary">修改會員資料</intput>
+    </div>
+</a>

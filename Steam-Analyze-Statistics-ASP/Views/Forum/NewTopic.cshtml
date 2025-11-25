@@ -1,0 +1,81 @@
+﻿@model Steam_Analyze_Statistics_ASP.Models.NewTopicForm;
+@*
+    
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "遊戲統計與圖表 - 發表文章";
+}
+@if (TempData["Message"] != null && TempData["Message"].ToString() != "")
+{
+    <script>
+        alert(@Html.Raw(Json.Serialize(@TempData["Message"])));
+    </script>
+
+    TempData["Message"] = "";
+}
+
+<div id="Formdiv">
+    <h2>發表文章</h2>
+    <form asp-action="NewTopic" asp-controller="Forum" id="FBForm">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="title" class="control-label">標題：</label>
+            <input asp-for="title"  class="form-control" />
+            <span asp-validation-for="title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="content" class="control-label">內容：</label>
+            <textarea asp-for="content" rows="10" class="form-control">
+            </textarea>
+            <span asp-validation-for="content" class="text-danger"></span>
+        </div>
+        <div class="from-group" style="text-align: right; ">
+            <br />
+            <button type="submit" id="stn" name="stn" class="btn btn-primary">送出建議</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+@section Scripts {
+@*     
+<script>
+$(function (){
+    $("#stn").on("click", function () {
+        var dataValue = {
+          name: $("input[name='name']").val(),
+          email: $("input[name='email']").val(),
+          title: $("input[name='title']").val(),
+          contant: $("textarea[name='contant']").val()
+        };
+        console.log("sending", dataValue);
+
+        $.ajax({
+            type: "POST",
+            url: "/FeedBack/getData",
+            data: JSON.stringify(dataValue),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            
+            success: function (result) {
+                console.log("success", result);
+                if(result)
+                    alert("意見已新增成功");                
+                else
+                    alert("意見無法新增");
+                document.getElementById("FBForm").reset();
+            },
+
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+            }
+        });
+    });
+});
+</script> *@
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+}

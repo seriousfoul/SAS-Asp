@@ -1,0 +1,107 @@
+﻿@using X.PagedList.Mvc.Core
+@using X.PagedList;
+@model IPagedList<TopicReplyInfo>;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "遊戲統計與圖表 - 討論內容";
+    int topicId = ViewBag.id;
+    var topic = ViewBag.topicInfo;
+}
+
+
+    <div class="topic">
+        <div class="topicTitle">
+            <span>@topic.title</span>
+        </div>
+
+        <div class="topicInfo">
+            <span>樓主：@topic.user</span>
+            <span>時間：@topic.date </span>
+        </div>
+
+        <div class="topicContent">
+            <span>@topic.content</span>
+        </div>
+        
+
+        @foreach (var row in Model){    
+            <hr />
+            <div class="topicInfo">
+                <span>層數：@row.rank</span> <span>@row.user</span> <span>時間：@row.date</span>
+            </div>
+            <div class="topicContent">
+                <span>@row.content</span>
+            </div>
+        }
+
+        @if (ViewData["user"] != "")
+        {
+            <div id="formdiv">
+                <form action="" id="trForm">
+                    <div class="form-group">
+                        <label>回覆文章：</label>
+                        <textarea name="replyContent" cols="50" rows="10" class="form-control" required></textarea>
+                    </div>
+                    <div class="from-group" style="text-align: right; ">
+                        <br />
+                        <button type="button" id="stn" name="stn" class="btn btn-primary">送出建議</button>
+                    </div>
+                </form>
+            </div>
+        }
+    </div>
+    
+                
+
+
+
+
+
+
+
+@if (Model.Count > 0)
+{
+    <div class="pageNumber">
+        @Html.PagedListPager(Model, page => Url.Action("Forum", new { topicId, page }))
+    </div>
+}
+
+@section Scripts {
+    
+<script>
+$(function (){
+    $("#stn").on("click", function () {
+        var dataValue = {
+            replyContent: $("textarea[name='replyContent']").val(),
+            topicId: @topicId
+        };
+        console.log("sending", dataValue);
+
+        $.ajax({
+            type: "POST",
+            url: "/Forum/TopicReply",
+            data: JSON.stringify(dataValue),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            
+            success: function (result) {
+                console.log("success", result);
+                if(result)
+                    alert("意見已新增成功");                
+                else
+                    alert("意見無法新增");
+                document.getElementById("trForm").reset();
+                location.reload();
+            },
+
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+            }
+        });
+    });
+});
+</script>
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+}

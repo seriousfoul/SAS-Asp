@@ -1,0 +1,53 @@
+﻿@model Steam_Analyze_Statistics_ASP.Models.User_Account
+
+@{
+    Layout = "_LoginAndRigister";
+    ViewData["Title"] = "遊戲統計與圖表 - 登入帳號";
+}
+
+@if (TempData["Message"] != null && TempData["Message"] != "")
+{
+    <script>
+        alert(@Html.Raw(Json.Serialize(@TempData["Message"])));
+    </script>
+}
+    
+<div class="loginForm">
+    <div class="loginLeft">
+        <img src="~/img/discuss.jpeg"/>
+    </div>
+    <div class="loginRight">
+        <div id="Formdiv">
+            <H2>會員登入</H2>
+            <form id="loginForm" class="auth-form active" asp-controller="LoginAndRigister" asp-action="Login" method="post">
+                <div class="form-group">
+                    <label for="loginEmail" class="control-label">用戶名稱</label>
+                    <input name="account" class="form-control" type="text" id="loginEmail" placeholder="請輸入用戶名" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword" class="control-label">密碼</label>
+                    <input name="password" class="form-control" type="password" id="loginPassword" placeholder="請輸入密碼" required />
+                </div>
+
+                @* <div class="form-group">
+                    <div class="remember-me">
+                        <input type="checkbox" name="remember" id="remember">
+                        <label for="remember">記住我</label>
+                    </div>
+                </div> *@
+
+                <div class="from-group" style="text-align: right; ">
+                    <br />
+                    <button type="submit" id="stn" name="stn" class="btn btn-primary">登入</button>
+                </div>
+            </form>
+        </div>
+    </div>    
+</div>
+
+
+<!-- Asp.net 驗證功能 -->
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+}

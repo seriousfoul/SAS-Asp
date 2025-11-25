@@ -1,0 +1,77 @@
+﻿@model Steam_Analyze_Statistics_ASP.Models.ProductInfo;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@if (TempData["Message"] != null && TempData["Message"] != "")
+{
+    <script>
+        alert(@Html.Raw(Json.Serialize(@TempData["Message"])));
+    </script>
+
+    TempData["Message"] = "";
+}
+
+<h1>商品頁面</h1>
+<br />
+<hr />
+<div style="margin-bottom:6vh;">
+    <div style="width:30%; float:left; margin-right:3vw;">
+        <img src="@Model.image" style="width:100%"/>
+    </div>
+
+    <div style="float:left;">
+        <div style="margin-bottom:10vh;">
+            <span style="font-size:1.5vw;" >商品名稱：@Model.name</span><br />
+            <span style="font-size:1.5vw;">商品價格：@Model.price</span><br />
+            <span style="font-size:1.5vw;">剩餘數量：@Model.remain</span>
+        </div>
+        <div>
+            <form asp-action="ProductDetail" asp-controller="Products">
+                <div class="form-group" style="margin-bottom:2.5em;">
+                    <label class="control-label" style="font-size:1.2vw;">購買數量：</label><br />
+                    <button name="button1" type="button" class="btn btn-success" style="margin-right:1em;" onclick="numberD()">←</button>
+                    <input name="amount" type="number" value="0" min="0" max="@Model.remain" style="color:#000000; margin-right:1em;" onchange="numberChange(this)" />
+                    <button name="button2" type="button" class="btn btn-success" style="margin-right:1em;" onclick="numberA()">→</button>
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="stn" name="stn" class="btn btn-primary">確認</button>
+                </div>
+                <input type="hidden" name="id" value="@Model.productId"/>
+                <input type="hidden" name="name" value="@Model.name" />
+                <input type="hidden" name="price" value="@Model.price" />
+            </form>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+</div>
+
+
+<script>
+    function numberD(){
+        var number = parseInt(document.getElementsByName("amount")[0].value) - 1;
+        if (number < 0){
+            number = 0;
+        }
+        document.getElementsByName("amount")[0].value = number;
+    }      
+    
+    function numberA(){        
+        var number = parseInt(document.getElementsByName("amount")[0].value) + 1;;
+        if (number > @Model.remain){
+            number = @Model.remain;
+        }
+        document.getElementsByName("amount")[0].value = number;
+    }
+    
+    function numberChange(input){
+        var number = parseInt(input.value);
+        if (number < 0){
+            number = 0;
+        }
+        else if (number > @Model.remain){
+            number = @Model.remain;
+        }
+        input.value = number;
+    }    
+
+</script>
