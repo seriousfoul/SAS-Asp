@@ -95,8 +95,12 @@ namespace Steam_Analyze_Statistics_ASP.Models
             List<Top5PeopleGame> top5PeopleGameData = new List<Top5PeopleGame>();
 
             DateTime date = DateTime.Now;
-            string sql = $"SELECT g.*, s.image, s.link FROM {tableName} as g LEFT JOIN(select name, min(image) as image, link from topsellers GROUP BY name,link) as s on g.name = s.name  where month = \"{date.Year}-{date.Month}-01\" and link like \"%global%\"";
 
+            string sql = "";
+            if (tableName == "Top5SellGame")
+                sql = $"SELECT g.*, s.image, s.link FROM {tableName} as g LEFT JOIN(select name, min(image) as image, link from topsellers GROUP BY name,link) as s on g.name = s.name  where month = \"{date.Year}-{date.Month}-01\" and link like \"%global%\"";
+            else
+                sql = $"SELECT g.*, s.image, s.link FROM {tableName} as g LEFT JOIN(select name, min(image) as image, link from mostplayed GROUP BY name,link) as s on g.name = s.name  where month = \"{date.Year}-{date.Month}-01\" ";
             MySqlConnection mydb = new MySqlConnection(connStr);
             MySqlCommand sqlCommand = new MySqlCommand(sql);
             sqlCommand.Connection = mydb;

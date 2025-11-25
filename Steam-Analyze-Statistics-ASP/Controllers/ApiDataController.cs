@@ -77,7 +77,6 @@ namespace Steam_Analyze_Statistics_ASP.Controllers
         [HttpGet("{gt}/{sm}")]
         public IActionResult Api(string gt, string sm)
         {
-            Console.WriteLine($"gt={gt}"); // , sm={sm}
 
             string tableName = "";
             if (gt == "game")

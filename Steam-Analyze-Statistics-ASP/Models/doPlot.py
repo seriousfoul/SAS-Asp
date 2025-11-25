@@ -1,5 +1,5 @@
-# import mysqlDb
-import sqlite3
+from mysqlDb import mydb
+# import sqlite3
 
 from datetime import datetime
 
@@ -46,7 +46,7 @@ def barPlot(dictData, tableName, today):
             toTable = "top10peoplegametype"
             sql = "select * from {} where month = '{}' and `rank` = '{}'".format(toTable, today.strftime("%Y-%m-01"), time+1)
         
-        mydb = sqlite3.connect("steam.db")
+
         cursor = mydb.cursor()
         cursor.execute(sql)
         
@@ -84,7 +84,7 @@ def barPlot(dictData, tableName, today):
 def piePlot(tableName, today):
     sql = "select price, sale from {} where date >= {}".format(tableName, today.strftime("%Y-%m-01"))
     
-    mydb = sqlite3.connect("steam.db")
+
     cursor = mydb.cursor()
     cursor.execute(sql)
     price = {'free':0, 'price':0, 'sale':0}
@@ -109,7 +109,7 @@ def piePlot(tableName, today):
             toTable = "mostplaypricepie"
             sql = "select * from {} where month = '{}' and type = '{}'".format(toTable, today.strftime("%Y-%m-01"), priceDf['priceType'][time])
         
-        mydb = sqlite3.connect("steam.db")
+
         cursor = mydb.cursor()
         cursor.execute(sql)
         sumNum = sum(priceDf['count'])    
@@ -156,9 +156,8 @@ def markPlot(dbTable):
     now = datetime.today()
     
     # 搜尋當月上榜最多的前5筆資料
-    sql = 'select *,count(name) as time from `{}` where date >= "{}" Group by name Order by time DESC limit 5'.format(dbTable, now.strftime("%Y-%m-01"))
-    
-    mydb = sqlite3.connect("steam.db")
+    sql = 'select *,count(name) as time from `{}` where date >= "{}" Group by id, image, price, sale, `rank`, link, type, date Order by time DESC limit 5'.format(dbTable, now.strftime("%Y-%m-01"))
+
     cursor = mydb.cursor()
     cursor.execute(sql)
     info = cursor.fetchall()
@@ -179,7 +178,7 @@ def markPlot(dbTable):
             gameInfo = {}
             gameInfo['rank'] = col[0]
             gameInfo['sale'] = col[1]
-            gameInfo['date'] = datetime.strptime(col[2], "%Y-%m-%d").strftime("%d")
+            gameInfo['date'] = col[2].strftime("%d");
             gameInfoList.append(gameInfo)
             
         
@@ -221,7 +220,7 @@ def markPlot(dbTable):
             toTable = "top5peoplegame"
             sql = "select id from {} where month = '{}' and `rank` = '{}'".format(toTable, now.strftime("%Y-%m-01"), time+1)
         
-        mydb = sqlite3.connect("steam.db")
+        print(sql)
         cursor = mydb.cursor()
         cursor.execute(sql)
 

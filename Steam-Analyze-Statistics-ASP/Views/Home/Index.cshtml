@@ -8,7 +8,6 @@
     List<DbData.TopSellPricePie> topSellPricePie = ViewBag.TopSellPricePie;
     List<DbData.MostPlayPricePie> mostPlayPricePie = ViewBag.MostPlayPricePie;
     string str = "";
-    Console.WriteLine(top5SellGame.Count.ToString());
 }
 
 
@@ -161,6 +160,7 @@
 
                     @foreach(var row in top5PeopleGame)
                     {
+                        
                         <a href="@row.link">
                             <span>@row.rank</span>
                             <span style="width: 65%">@row.name</span>
