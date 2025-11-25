@@ -21,7 +21,7 @@ def linePlot(Plot, tableName , today):
     plt.ylabel('Rank', fontsize=15, color="darkblue", fontproperties=chinese_font)
     
     pltname = tableName.upper() + " - line"
-    plt.tick_params(axis='both' ,labelsize=12, color = 'darkblue')    
+    plt.tick_params(axis='both' ,labelsize=12, color = 'darkblue')  
     plt.savefig(f'../wwwroot/img/{pltname}.png')
     plt.clf()
     plt.close()   
@@ -156,7 +156,7 @@ def markPlot(dbTable):
     now = datetime.today()
     
     # 搜尋當月上榜最多的前5筆資料
-    sql = 'select *,count(name) as time from `{}` where date >= "{}" Group by id, image, price, sale, `rank`, link, type, date Order by time DESC limit 5'.format(dbTable, now.strftime("%Y-%m-01"))
+    sql = 'select name,type,price,count(`name`) as time from `{}` where date >= "{}" Group by name,type,price Order by time desc, avg(`rank`) asc limit 5'.format(dbTable, now.strftime("%Y-%m-01"))
 
     cursor = mydb.cursor()
     cursor.execute(sql)
@@ -166,10 +166,10 @@ def markPlot(dbTable):
     gameList = []
     for row in info:
         gameNameData = {}
-        gameNameData["name"] = row[1]
-        gameNameData["type"] = row[7]
+        gameNameData["name"] = row[0]
+        gameNameData["type"] = row[1]
         gameNameData['price'] = row[2]
-        sql = "select `rank`, sale, date from {} where date >= '{}' and name = '{}'".format(dbTable, now.strftime("%Y-%m-01"), row[1])
+        sql = "select `rank`, sale, date from {} where date >= '{}' and name = '{}'".format(dbTable, now.strftime("%Y-%m-01"), row[0])
         cursor.execute(sql)
         rowInfo = cursor.fetchall()
         
@@ -186,6 +186,7 @@ def markPlot(dbTable):
         
         gameList.append(gameNameData)
     
+
     # 資料由 Json 轉成 pandas
     gameListDf = pd.DataFrame(gameList)
     
@@ -220,7 +221,6 @@ def markPlot(dbTable):
             toTable = "top5peoplegame"
             sql = "select id from {} where month = '{}' and `rank` = '{}'".format(toTable, now.strftime("%Y-%m-01"), time+1)
         
-        print(sql)
         cursor = mydb.cursor()
         cursor.execute(sql)
 
@@ -239,8 +239,7 @@ def markPlot(dbTable):
     # 長方圖 - 一個月內上榜遊戲的類別比較
     typeGroup = {}
     for time in range(len(info)):
-
-        for typeName in info[time][7].split(","):
+        for typeName in info[time][1].split(","):
             if typeName in typeGroup:
                 typeGroup[typeName] += 1
             else:
