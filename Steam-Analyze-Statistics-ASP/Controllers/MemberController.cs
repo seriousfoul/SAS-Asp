@@ -139,6 +139,20 @@ namespace Steam_Analyze_Statistics_ASP.Controllers
                 return RedirectToAction("Login", "LoginAndRigister");
         }
 
+        public IActionResult EditListRemoveProducts(int page = 1)
+        {
+            int dataTotal = 20;
+            if (isLogin())
+            {
+                var data = new DBWorker().EditListRemoveProducts();
+                var result = data.ToPagedList(page, dataTotal);
+                return View(model: result);
+            }
+            else
+                return RedirectToAction("Login", "LoginAndRigister");
+        }
+
+
         public bool isLogin()
         {
             try

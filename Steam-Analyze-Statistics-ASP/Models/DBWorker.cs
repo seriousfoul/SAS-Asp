@@ -957,6 +957,7 @@ namespace Steam_Analyze_Statistics_ASP.Models
             
         }
 
+        // 購物車新增商品
         public bool AddCart(ProductInfo data, string account)
         {
             MySqlConnection mydb = null;
@@ -1043,6 +1044,7 @@ namespace Steam_Analyze_Statistics_ASP.Models
             return true;
         }
 
+        // 取得購物車商品
         public List<ProductInfo> GetCart(string account)
         {            
             MySqlConnection mydb = null;
@@ -1100,6 +1102,7 @@ namespace Steam_Analyze_Statistics_ASP.Models
             
         }
 
+        // 取得購物車商品數量
         public int GetCartCount(string account)
         {
             MySqlConnection mydb = null;
@@ -1132,6 +1135,7 @@ namespace Steam_Analyze_Statistics_ASP.Models
             }
         }
 
+        // 刪除購物車商品
         public bool DeleteCart(int id)
         {
             MySqlConnection mydb = null;
@@ -1160,6 +1164,7 @@ namespace Steam_Analyze_Statistics_ASP.Models
 
         }
 
+        // 結算商品
         public bool Settlement(int total, string account)
         {
             MySqlConnection mydb = null;
@@ -1284,6 +1289,7 @@ namespace Steam_Analyze_Statistics_ASP.Models
             }
         }
 
+        // 取得訂單資料
         public List<SelfOrderInfo> GetSelfOrderInfo(string account)
         {
             MySqlConnection mydb = null;
@@ -1327,6 +1333,49 @@ namespace Steam_Analyze_Statistics_ASP.Models
                 mydb?.Close();
             }
 
+        }
+
+        // 上下架商品
+        public List<ProductInfo> EditListRemoveProducts()
+        {
+            MySqlConnection mydb = null;
+            try
+            {
+                string sql = "select productId, name, status from products";
+
+                mydb = new MySqlConnection(connStr);
+                MySqlCommand sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Connection = mydb;
+
+                mydb.Open();
+
+                MySqlDataReader data = sqlCommand.ExecuteReader();
+
+                List<ProductInfo> tempList = new List<ProductInfo>();
+
+                if (data.HasRows)
+                {
+                    while (data.Read())
+                    {
+                        tempList.Add(new ProductInfo()
+                        {
+                            productId = data.GetInt32(0),
+                            name = data.GetString(1),
+                            status = data.GetInt32(2)
+                        });
+                    }
+                }
+                mydb.Close();
+                return tempList;
+            }
+            catch
+            {
+                return new List<ProductInfo>();
+            }
+            finally
+            {
+                mydb?.Close();
+            }
         }
     }
 }

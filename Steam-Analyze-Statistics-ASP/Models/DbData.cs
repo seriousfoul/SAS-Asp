@@ -215,6 +215,7 @@ namespace Steam_Analyze_Statistics_ASP.Models
         public int amount { get; set; }
         public int subTotal { set; get; }
         public int userId {  set; get; }
+        public int status { get; set; }
     }
     public class SelfOrderInfo
     {
