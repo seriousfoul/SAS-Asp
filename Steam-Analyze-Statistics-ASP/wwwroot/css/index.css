@@ -3,6 +3,7 @@ body {
     margin: 0vh;
     width: 80%;
     margin-left: 10%;
+    margin-right: 10%;
 }
 
 /* 頁首 */
@@ -10,6 +11,7 @@ body {
     font-size: 2.5vw;
     /*    height: 6.5vh;*/
     color: #ffffff;
+    line-height:2.5vw;
 }
 
 #BannerLeft {
@@ -24,7 +26,7 @@ body {
 
 
 #BannerRight {
-    float: right;
+    float: left;
     width: 30%;
     text-align: right;
 }
@@ -50,29 +52,31 @@ body {
 }
 
 .loginText {
-    padding-top:5%;
     width: 50%;
-    font-size: 1vw; 
+    font-size: 2vw; 
+    line-height:2.5vw;
 }
 
 
 
 /*選單*/
 #Menu {
+    clear:both;
     background-color: #0b4299;
-    height: 2.4vw;
+    height: auto;
     width:100%;
 }
 
 #Menu li {
     float: left;
-    width: 16%;
+    width: 16.6%;
     list-style: none;
-    line-height: 2.4vw;
     font-weight: bold;
-    font-size: 1vw;
+    font-size: 2.5vw;
     color: #ffffff;
     text-align: center;
+    padding-left:1%;
+    padding-right:1%;
 }
 
 #Menu a {
@@ -80,6 +84,9 @@ body {
     color: #ffffff;
 }
 
+#Menu li::after {
+    clear:both;
+}
 
 /* 內容 */
 #Content {
@@ -433,4 +440,21 @@ body {
     width: 12%;
     margin-left: 2.5%;
     text-align: right;
+}
+
+@media (max-width: 768px) {
+
+    #Menu {
+        height: 14.4vw;
+    }
+
+    #Menu li {
+        float: left;
+        width: 32%;
+        line-height: 4.8vw;
+        font-size: 4vw;
+
+    }
+
+   
 }
