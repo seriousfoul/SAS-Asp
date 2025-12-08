@@ -54,7 +54,7 @@
                 else
                 {
                     <span stype="margin-right:1em;">@ViewData["user"]</span>
-                    <a asp-area="" asp-controller="Member" asp-action="userInfo">
+                        <a asp-area="" asp-controller="Member" asp-action="userInfo" style="text-decoration: underline;">
                         <span stype="margin-right:1em;">會員訊息</span>
                     </a>                    
                        
@@ -65,7 +65,7 @@
                     @if (ViewData["CartAmount"] != null && ViewData["CartAmount"].ToString() != "0" && ViewData["CartAmount"].ToString() != "")
                     {
                         <br />
-                        <a asp-area="" asp-controller="Products" asp-action="ShoppingCart">
+                            <a asp-area="" asp-controller="Products" asp-action="ShoppingCart" style="text-decoration: underline;">
                             <span stype="margin-right:1em;">購物車(@ViewData["CartAmount"])</span>
                         </a>
                     }
