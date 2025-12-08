@@ -609,10 +609,12 @@ namespace Steam_Analyze_Statistics_ASP.Models
                 sqlCommand.ExecuteNonQuery();
                 mydb.Close();
 
-                sql = $"insert into TopicRank (TopicId, lastUpdate) values ( (select id from Topic where userId = {id} and date = '{time}'),'{time}')";
+                sql = $"insert into TopicRank (TopicId, lastUpdate) values ( (select topicId from Topic where userId = @userId and date = @date), @date)";
 
                 mydb = new MySqlConnection(connStr);
                 sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Parameters.AddWithValue("@userId", id);
+                sqlCommand.Parameters.AddWithValue("@date", time);
                 sqlCommand.Connection = mydb;
 
                 mydb.Open();
@@ -620,10 +622,12 @@ namespace Steam_Analyze_Statistics_ASP.Models
                 mydb.Close();
 
 
-                sql = $"select count(*) from Topic where userId = {id} and date = '{time}'";
+                sql = $"select count(*) from Topic where userId = @userId and date = @date";
 
                 mydb = new MySqlConnection(connStr);
                 sqlCommand = new MySqlCommand(sql);
+                sqlCommand.Parameters.AddWithValue("@userId", id);
+                sqlCommand.Parameters.AddWithValue("@date", time);
                 sqlCommand.Connection = mydb;
                 mydb.Open();
                 reader = sqlCommand.ExecuteReader();
