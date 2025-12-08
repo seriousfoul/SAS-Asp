@@ -1,37 +1,41 @@
 body {
     background-color: #003D79;
     margin: 0vh;
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 2%;
 }
 
 /* 頁首 */
 #Banner {
-    font-size: 2.5vw;
+    font-size: 3vw;
     /*    height: 6.5vh;*/
     color: #ffffff;
-    line-height:2.5vw;
+
+    display: flex; /* 啟用 Flexbox */
+    flex-wrap: wrap;
+    justify-content: space-around; /* 水平分散排列 */
+    align-items: center; /*垂直置中 */
+    justify-content: center; /* 水平置中 */
 }
 
 #BannerLeft {
-    float: left;
     width: 20%;
 }
 
 #Title {
-    float: left;
     width: 50%;
 }
 
-
 #BannerRight {
-    float: left;
     width: 30%;
     text-align: right;
+    padding-right:5%;
 }
 .BannerRight-Content {
     float: left;
+    
 }
 
 #Banner a {
@@ -47,55 +51,72 @@ body {
     color: #ffffff;
 }
 
-.logo {
-    width: 50%;
-}
 
 .loginText {
-    width: 50%;
     font-size: 2vw; 
-    line-height:2.5vw;
-}
 
+}
+#Banner::after {
+    content: "";
+    display: table;
+    clear: both;
+}
 
 
 /*選單*/
 #Menu {
-    clear:both;
+    clear: both;
     background-color: #0b4299;
-    height: auto;
-    width:100%;
+    min-height: 3vw;
+    max-height: auto;
+    width: 100%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+
+
+    display: flex; /* 啟用 Flexbox */
+    flex-wrap: wrap;
+    justify-content: space-around; /* 水平分散排列 */
+    align-items: center; /*垂直置中 */
+    justify-content: center; /* 水平置中 */
 }
 
-#Menu li {
-    float: left;
-    width: 16.6%;
-    list-style: none;
-    font-weight: bold;
-    font-size: 2.5vw;
+.Unit {   
+    font-size: 2vw;
     color: #ffffff;
     text-align: center;
-    padding-left:1%;
-    padding-right:1%;
+    width:16.6%;
 }
 
-#Menu a {
+.Unit a{
     text-decoration: none;
     color: #ffffff;
 }
 
-#Menu li::after {
-    clear:both;
+#Menu ::after {
+    content: "";
+    display: table;
+    clear: both;
 }
+
 
 /* 內容 */
 #Content {
+    clear: both;
     color: #ffffff;
     width: 90%;
     margin-left: 5%;
+    margin-right: 5%;
+    height:auto;
     margin-bottom: 5%;
 }
-
+#Content ::after {
+    clear: both;
+}
 
 /* 頁尾 */
 #Footer {
@@ -126,6 +147,8 @@ body {
     float: left;
     width: 50%;
     background-color: #18579e7c;
+
+    min-height:fit-content;
 }
 
 .viewData {
@@ -133,7 +156,6 @@ body {
     padding-left: 10%;
     padding-right: 10%;
     padding-top: 5%;
-    text-align: center;
     display: block;
     margin-bottom : 5%;
 }
@@ -141,6 +163,7 @@ body {
 .viewData p {
     font-size: 1.5vw;
     text-align: center;
+    font-weight:bold;
 }
 
 .rowData span {
@@ -159,11 +182,17 @@ body {
     clear: both;
     display: break;
 }
+.rowPic picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .rowPic img {
     width: 100%;
-    display:block;
+    display: block;
     margin-bottom: 5%;
+    
 }
 
 .rowText {
@@ -244,13 +273,14 @@ body {
 
 
 /* 登入註冊 */
+
 .loginLeft {
     float: left;
     width: 50%;
     text-align: right;
 }
 .loginLeft img{
-    width:70%;
+    width:65%;
     
 }
 .loginRight {
@@ -258,7 +288,7 @@ body {
     width: 50%;
 }
 
-.loginForm h2 {
+.loginForm span {
     padding-bottom: 4%;
 }
 
@@ -272,8 +302,24 @@ body {
 }
 
 /* 討論區 */
-.tableForum{
+.Forum {
     min-height: 40vh;
+    text-align: center;
+}
+
+.ForumFormat {
+    display: flex; /* 啟用 Flexbox */
+    flex-wrap: wrap;
+    justify-content: center; /* 水平分散排列 */
+    align-items: center; /*垂直置中 */
+    padding: 1em;
+    font-size: 1.2vw;
+}
+
+.ForumUnit{
+    margin-left: 3%;
+    margin-right:3%;
+    width:10.6%;    
 }
 
 .topic {
@@ -283,7 +329,7 @@ body {
     padding-left: 5%;
     padding-right: 5%;
     padding-bottom: 5%;
-    min-height:40vh;
+    min-height: 40vh;
 }
 
 .topicTitle {
@@ -306,11 +352,13 @@ body {
 /* 會員頁面 */
 .memberLeft {
     float: left;
-    width: 15%;
+    width: 30%;
+    text-align: center;
+    padding-right: 5%;
 }
 
 .memberMenu {
-    margin-bottom: 2vh;  
+    margin-bottom: 2vh;      
 }
 
 .memberMenu a {
@@ -324,9 +372,14 @@ body {
     color: #FFFFFF;
 }
 
+.memberHTpye span {
+    font-size: 2.5vw;
+
+}
+
 .memberRight {
     float: left;
-    width: 85%;
+    width: 70%;
 }
 
 .memberRight a {
@@ -350,7 +403,7 @@ body {
 }
 
 .seftTopicMenu span {
-    font-size: 1.2vw;
+    font-size: 2vw;
 }
 
 .seftTopicHead {
@@ -405,6 +458,25 @@ body {
     margin-top: 1.5vh;
     display:block;
 }
+.productDetail {
+    margin-bottom: 6vh;
+}
+
+.productDetailImg {
+    width: 30%;
+    float: left;
+    margin-right: 5%;
+}
+
+.productDetailInfo {
+    float: left;
+    width: 65%;
+}
+
+.productDetailInfo span {
+    font-size: 1.5vw;
+}
+
 .cart{
     font-size: 1.2vw;
     margin-top: 5vh;
@@ -417,6 +489,14 @@ body {
 .cartTitle {
     margin-bottom: 2%;
     font-size: 1.5vw;
+    height:auto;
+    border-bottom:1px solid #FFFFFF;
+}
+
+.cartTitle::after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
 .cartContent{
@@ -436,25 +516,269 @@ body {
     margin-right:2.5%;
 }
 .cartTotal {
-    float: right;
-    width: 12%;
     margin-left: 2.5%;
     text-align: right;
+    margin-bottom: 3%;
 }
 
+.cartTotal span {
+    font-size: 1.5vw;
+}
+
+/* API */
+.api {
+    margin-top: 5%;
+    margin-bottom: 15%;
+    color: #ffffff;
+}
+
+.api span {
+    font-size: 1.5vw;
+}
+
+.api ol {
+    font-size:1.2vw;
+}
+
+
 @media (max-width: 768px) {
-
-    #Menu {
-        height: 14.4vw;
-    }
-
-    #Menu li {
-        float: left;
+    /* 選單 */
+    .Unit {
         width: 32%;
         line-height: 4.8vw;
         font-size: 4vw;
+        margin:1%;
+    }
+
+    /* 頁尾 */
+    #Footer {
+        height: 12vh;
+        line-height: 12vh;
+        font-size: 3vw;
+    }
+
+    /* 首頁 */
+    .viewSide {
+        width: 100%;
+    }
+
+    .viewData p {
+        font-size: 4vw;
+    }
+
+    .rowData span {
+        font-size: 2vw;
+    }
+
+    .rowText span {
+        width: 35%;
+        color: #ffffff;
+        height: 2em;
+        font-size: 3vw;
+    }
+
+    /* 今日遊戲 */
+    .gamePic {
+        width: 50%;
+        height: 16vw;
+
+    }
+    .rowPic img {
+        width: 70%;
+    }
+
+    .gameTitle {
+        min-height: 16vw;
+
+        width: 50%;
+        background-color: #18579e7c;
+        font-size: 2.5vw;
+    }
+
+    /* 統計圖 */
+    .cloud {
+        width: 100%;
 
     }
 
-   
+    .cloud img {
+        width: 100%;
+    }
+
+    .cloud span {
+        font-size: 5vw;
+    }
+
+    /* API */
+    .api span {
+        font-size: 3vw;
+    }
+
+    .api ol {
+        font-size: 2.4vw;
+    }
+
+    .tableForum {
+        min-height: 40vh;
+    }
+
+    /* 登入註冊 */
+    .loginLeft {
+        width: 0%;
+    }
+
+    .loginLeft img {
+        width: 0%;
+    }
+
+    .loginRight {
+        float: right;
+        width: 100%;
+    }
+
+    .loginForm span {
+        padding-bottom: 4%;
+    }
+
+    /* 會員頁面 */
+    .memberLeft {
+        float: left;
+        width: 25%;
+
+    }
+
+    .memberMenu span {
+        font-size: 3vw;
+    }
+
+    .memberRight {
+        float: left;
+        width: 75%;
+    }
+
+    .userInfoForm {
+        margin-bottom: 3vh;
+    }
+
+    .userInfoForm span {
+        font-size: 3vw;
+        margin-right: 1vw;
+    }
+
+    .memberHTpye span {
+        font-size: 5vw;
+    }
+
+    .seftTopicMenu span {
+        font-size: 3vw;
+    }
+
+    .seftTopicHead span {
+        font-size: 3vw;
+    }
+
+    .seftTopicContent span {
+        font-size: 3vw;
+    }
+
+    /* 購物車 */
+    .productItem {
+        float: left;
+        width: 27%;
+        margin-left: 3%;
+        margin-right: 3%;
+    }
+
+    .productItem span {
+        font-size: 2.5vw;
+    }
+
+    .productDetailImg {
+        width: 100%;
+    }
+
+    .productDetailInfo {
+        width: 100%;
+    }
+
+    .productDetailInfo span {
+        font-size: 5vw;
+    }
+
+    .cart {
+        font-size: 1.2vw;
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+        width: 95%;
+        margin-left: 2.5%;
+        text-align: right;
+    }
+
+    .cartTitle {
+        margin-bottom: 2%;
+        font-size: 5vw;
+    }
+
+    .cartContent {
+        clear: both;
+    }
+
+    .cartContent::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .cartSpanWidth {
+        float: left;
+        width: 13%;
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+        margin-bottom:2%;
+    }
+    .cartSpanWidth span {
+        font-size: 3.5vw;
+    }
+
+    .cartSpanWidth::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .cartTotal span{
+        font-size: 5vw;
+    }
+
+    /* 討論區 */
+    .topic {
+        width: 70%;
+        margin-left: 15%;
+        background-color: #18579e7c;
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-bottom: 5%;
+        min-height: 40vh;
+    }
+
+    .topicTitle {
+        font-size: 5vw;
+    }
+
+    .topicInfo {
+        font-size: 2vw;
+    }
+
+    .topicContent {
+        font-size: 3vw;
+    }
+
+    .ForumFormat {
+        justify-content: center; /* 水平分散排列 */
+        font-size: 6vw;
+    }
+
+    .ForumUnit {
+        width: 100%;
+    }
 }

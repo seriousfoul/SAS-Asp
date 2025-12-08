@@ -15,7 +15,7 @@
     <link href="/css/index.css" rel="stylesheet">
 </head>
 <body>
-     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+     <header class="">
 
         <div id="Banner">
             <div id="BannerLeft">
@@ -31,13 +31,8 @@
                 </a>
             </div>
             <div id="BannerRight">                
-                <div class="logo" style="float:right">
-                    <a href="https://store.steampowered.com/">
-                        <img src="/img/New_Steam_Logo_with_name.jpg">
-                    </a>
-                </div>
 
-                <div class="loginText" style="float:left">                    
+                <div class="loginText" >                    
                     <a asp-area="" asp-controller="LoginAndRigister" asp-action="Login">
                         <span>登入</span>
                     </a>
@@ -55,17 +50,18 @@
                 </div>           
             </div>
         </div>
-
+        <div style="border-bottom:1px solid #FFFFFF;"></div>
     </header>
+    
     
     <div id="Content">
         @RenderBody()
         <div style="clear: both;"></div>
     </div>
-
+    
     
     <footer class="border-top footer text-muted">
-        <div id="Footer">© 2025 Valve Corporation. 版權所有。所有商標皆為各自所有權人在美國與其他國家 (地區) 之財產。</div>
+        <div id="Footer">圖文資料來源於 Valve Corporation. 版權所有。</div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -27,11 +27,11 @@
     @if (type == "topic")
     {
         <div class="seftTopicHead">
-            <div class="seftTopicTitle" style="width:10%"><span>編號</span></div>
-            <div class="seftTopicTitle" style="width:20%"><span>標題</span></div>
-            <div class="seftTopicTitle" style="width:13%"><span>瀏覽次數</span></div>
-            <div class="seftTopicTitle" style="width:25%"><span>創建時間</span></div>
-            <div class="seftTopicTitle" style="width:25%"><span>最後更新時間</span></div>
+            <div class="seftTopicTitle" style="width:13%; text-align:center;"><span>編號</span></div>
+            <div class="seftTopicTitle" style="width:24%; text-align:center;"><span>標題</span></div>
+            <div class="seftTopicTitle" style="width:13%; text-align:center;"><span>瀏覽次數</span></div>
+            <div class="seftTopicTitle" style="width:25%; text-align:center;"><span>創建時間</span></div>
+            <div class="seftTopicTitle" style="width:25%; text-align:center;"><span>最後更新時間</span></div>
             <div style="clear:both"></div>
         </div>
          
@@ -40,11 +40,11 @@
             <a asp-controller="Forum" asp-action="Topic" asp-route-id="@row.topicId">
             <div class="seftTopicContent">
                 <div style="margin-bottom:1vh">
-                    <div class="seftTopicTitle" style="width:10%"><span>@row.topicId</span></div>
-                    <div class="seftTopicTitle" style="width:20%"><span> @row.title </span></div>
-                    <div class="seftTopicTitle" style="width:13%"><span> @row.view </span></div>
-                    <div class="seftTopicTitle" style="width:25%"><span> @row.topicDate </span></div>
-                    <div class="seftTopicTitle" style="width:25%"><span> @row.topicLastUpdate </span></div>
+                    <div class="seftTopicTitle" style="width:13%; text-align:center;"><span>@row.topicId</span></div>
+                    <div class="seftTopicTitle" style="width:24%; text-align:center;"><span> @row.title </span></div>
+                    <div class="seftTopicTitle" style="width:13%; text-align:center;"><span> @row.view </span></div>
+                    <div class="seftTopicTitle" style="width:25%; text-align:center;"><span> @row.topicDate </span></div>
+                    <div class="seftTopicTitle" style="width:25%; text-align:center;"><span> @row.topicLastUpdate </span></div>
                     <div style="clear:both"></div>
                 </div>
                 <div>

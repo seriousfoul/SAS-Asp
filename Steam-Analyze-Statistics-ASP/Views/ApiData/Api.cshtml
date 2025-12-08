@@ -5,22 +5,24 @@
     ViewData["Title"] = "遊戲統計與圖表 - API工具";
 }
 
-<div style="margin-top:5%; margin-bottom:15%; color:#ffffff;">
-    <p style="font-size:2vw;"> 歡迎使用 api 工具 </p>
-    <p style="font-size:1.5vw;">
-        請在網址上輸入 /api/gt/sm 來選取需要的數據： </h4>
-        <ol style="font-size:1.2vw;">
-            <li> gt：在 gt 的位置填入 game / type / price </li>
-            <ul>
-                <li> game 為 前五名遊戲 </li>
-                <li> type 為 前十名遊戲類別 </li>
-                <li> price 為 價格排行百分比 </li>
-            </ul>
-            <br />
-            <li> sm：在 sm 的位置填入 topSeller / mostPlayer </li>
-            <ul>
-                <li> topSeller 為 暢銷遊戲 </li>
-                <li> mostPlayer 為 最多人由玩遊戲 </li>
-            </ul>
-        </ol>
+<div class="api">
+    <h3> 歡迎使用 api 工具 </h3>
+    
+    <span> 請在網址上輸入 /api/gt/sm 來選取需要的數據： </span><br />    
+    
+    <ol >
+        <li> gt：在 gt 的位置填入 game / type / price </li>
+        <ul>
+            <li> game 為 前五名遊戲 </li>
+            <li> type 為 前十名遊戲類別 </li>
+            <li> price 為 價格排行百分比 </li>
+        </ul>
+        <br />
+        <li> sm：在 sm 的位置填入 topSeller / mostPlayer </li>
+        <ul>
+            <li> topSeller 為 暢銷遊戲 </li>
+            <li> mostPlayer 為 最多人由玩遊戲 </li>
+        </ul>
+    </ol>
+    <span>例：...azurewebsites.net/ApiData/Api/game/topSeller</span><br />
 </div>

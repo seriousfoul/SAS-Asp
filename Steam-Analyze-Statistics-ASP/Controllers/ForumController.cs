@@ -56,17 +56,15 @@ namespace Steam_Analyze_Statistics_ASP.Controllers
 
             // cookie and session
             if (b)
-                return RedirectToAction("Forum", "Forum");                
+                return RedirectToAction("Forum", "Forum");
             else
             {
                 TempData["Message"] = "發文未成功";
                 return View();
             }
-                
         }
 
         [HttpPost]
-
         public JsonResult TopicReply([FromBody] TopicReplyForm trData)
         {
 

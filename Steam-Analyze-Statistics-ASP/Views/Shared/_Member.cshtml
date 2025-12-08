@@ -15,7 +15,7 @@
     <link href="/css/index.css" rel="stylesheet">
 </head>
 <body>
-     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+     <header class="">
 
         <div id="Banner">
             <div id="BannerLeft">
@@ -31,16 +31,10 @@
                 </a>
             </div>
             <div id="BannerRight">                
-                <div class="logo" style="float:right">
-                    <a href="https://store.steampowered.com/">
-                        <img src="/img/New_Steam_Logo_with_name.jpg">
-                    </a>
-                </div>
 
-                <div class="loginText" style="float:left">
+                <div class="loginText" >
                     <span stype="margin-right:1em;">@ViewData["user"]</span>
-                    <a asp-area="" asp-controller="Member" asp-action="userInfo
-">
+                    <a asp-area="" asp-controller="Member" asp-action="userInfo">
                         <span stype="margin-right:1em;">會員訊息</span>
                     </a>                   
                     <a asp-area="" asp-controller="Home" asp-action="Logout">
@@ -58,39 +52,37 @@
         </div>
         <div id="Menu">
 
-            <ol>
-                <li>
-                    <a asp-area="" asp-controller="GetDataToday" asp-action="GetDataToday" asp-route-tableName="topsellers">
-                        今日暢銷遊戲排行榜
-                    </a>
-                </li>
-                <li>
-                    <a asp-area="" asp-controller="GetDataToday" asp-action="GetDataToday" asp-route-tableName="mostplayed">
-                        今日遊玩人數排行榜
-                    </a>
-                </li>
-                <li>
-                    <a asp-area="" asp-controller="Home" asp-action="Analyze_Data">
-                        遊戲相關統計表
-                    </a>
-                </li>
-                <li>
-                    <a asp-area="" asp-controller="Forum" asp-action="Forum">
-                        討論區
-                    </a>
-                </li>
-                <li>
-                    <a asp-area="" asp-controller="Products" asp-action="Products">
-                        購物商城
-                    </a>
-                </li>
-                <li>
-                    <a asp-area="" asp-controller="ApiData" asp-action="Api">
-                        串接資料
-                    </a>
-                </li>
+            <div class="Unit">
+                <a asp-area="" asp-controller="GetDataToday" asp-action="GetDataToday" asp-route-tableName="topsellers">
+                    <span>今日暢銷</span>
+                </a>
+            </div>
+            <div class="Unit">
+                <a asp-area="" asp-controller="GetDataToday" asp-action="GetDataToday" asp-route-tableName="mostplayed">
+                    <span>今日熱門</span>
+                </a>
+            </div>
 
-            </ol>
+            <div class="Unit">
+                <a asp-area="" asp-controller="Home" asp-action="Analyze_Data">
+                    <span>排名統計</span>
+                </a>
+            </div>
+            <div class="Unit">
+                <a asp-area="" asp-controller="Forum" asp-action="Forum">
+                    <span>討論區</span>
+                </a>
+            </div>
+            <div class="Unit">
+                <a asp-area="" asp-controller="Products" asp-action="Products">
+                    <span>購物商城</span>
+                </a>
+            </div>
+            <div class="Unit">
+                <a asp-area="" asp-controller="ApiData" asp-action="Api">
+                    <span>串接資料</span>
+                </a>
+            </div>
 
         </div>
     </header>
@@ -120,7 +112,9 @@
             @if (ViewData["level"].ToString() == "admin")
             {       
                 <hr />
-                <h2>管理者</h2>
+                <div class="memberHTpye">
+                    <span>管理者</span>
+                </div>
                 <div class="memberMenu">
                     <a asp-controller="Member" asp-action="SelfOrder">
                         <span>商品上下架</span>
@@ -139,7 +133,7 @@
 
     
     <footer class="border-top footer text-muted">
-        <div id="Footer">© 2025 Valve Corporation. 版權所有。所有商標皆為各自所有權人在美國與其他國家 (地區) 之財產。</div>
+        <div id="Footer">圖文資料來源於 Valve Corporation. 版權所有。</div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

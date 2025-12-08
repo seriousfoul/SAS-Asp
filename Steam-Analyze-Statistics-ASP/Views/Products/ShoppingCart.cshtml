@@ -11,12 +11,12 @@
 
     TempData["Message"] = "";
 }
-
-<h1>購物車結算</h1>
-<br />
+<div class="memberHTpye">
+    <span>購物車結算</span>
+</div>
 <hr />
 <div class="cart">
-    <div class="cartTitle">
+    <div class="cartTitle" >
         <div class="cartSpanWidth">
             <span>商品名稱</span>
         </div>        
@@ -68,7 +68,9 @@
 </div>
 <hr />
 <div class="cartContent">
-
+    <div class="cartTotal">
+        <span >總計：@ViewData["Total"]</span>
+    </div>
     <div class="cartTotal">
         <form asp-action="Settlement" asp-controller="Products">
             <button type="submit" class="btn btn-primary" >確認結帳</button>
@@ -76,9 +78,7 @@
         </form>
     </div>
 
-    <div class="cartTotal">
-        <span style="font-size:1.5vw;">總計：@ViewData["Total"]</span>
-    </div>
+    
      
 </div>
 

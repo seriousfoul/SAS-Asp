@@ -10,25 +10,25 @@
 
     TempData["Message"] = "";
 }
-
-<h1>商品頁面</h1>
-<br />
+<div class="memberHTpye">
+    <span>商品頁面</span>
+</div>
 <hr />
-<div style="margin-bottom:6vh;">
-    <div style="width:30%; float:left; margin-right:3vw;">
+<div class="productDetail">
+    <div class="productDetailImg">
         <img src="@Model.image" style="width:100%"/>
     </div>
 
-    <div style="float:left;">
+    <div class="productDetailInfo">
         <div style="margin-bottom:10vh;">
-            <span style="font-size:1.5vw;" >商品名稱：@Model.name</span><br />
-            <span style="font-size:1.5vw;">商品價格：@Model.price</span><br />
-            <span style="font-size:1.5vw;">剩餘數量：@Model.remain</span>
+            <span>商品名稱：@Model.name</span><br />
+            <span>商品價格：@Model.price</span><br />
+            <span>剩餘數量：@Model.remain</span>
         </div>
         <div>
+            <span>購買數量</span><br />
             <form asp-action="ProductDetail" asp-controller="Products">
-                <div class="form-group" style="margin-bottom:2.5em;">
-                    <label class="control-label" style="font-size:1.2vw;">購買數量：</label><br />
+                <div class="form-group" style="margin-bottom:2.5em;">                    
                     <button name="button1" type="button" class="btn btn-success" style="margin-right:1em;" onclick="numberD()">←</button>
                     <input name="amount" type="number" value="0" min="0" max="@Model.remain" style="color:#000000; margin-right:1em;" onchange="numberChange(this)" />
                     <button name="button2" type="button" class="btn btn-success" style="margin-right:1em;" onclick="numberA()">→</button>
