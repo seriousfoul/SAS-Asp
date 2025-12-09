@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Steam_Analyze_Statistics_ASP.Models;
 using X.PagedList.Extensions;
+using FluentEcpay;
 
 namespace Steam_Analyze_Statistics_ASP.Controllers
 {
