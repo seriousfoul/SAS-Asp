@@ -129,7 +129,7 @@ namespace Steam_Analyze_Statistics_ASP.Controllers
             }
             else
             {
-                return BadRequest(new { Percentage_of_Top_Seller_Price_Type = new { status = "Failure", message = "Nothing Here" } });
+                return BadRequest( new { status = "Failure", message = "Nothing Here" } );
             }
         }
     }
